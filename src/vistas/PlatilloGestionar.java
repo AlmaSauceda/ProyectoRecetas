@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.PlatillosControlador;
+import controlador.PlatillosActualizaEliminaController;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -18,6 +18,8 @@ import javax.swing.JRadioButton;
 
 public class PlatilloGestionar extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtCosto;
@@ -160,11 +162,11 @@ public class PlatilloGestionar extends JFrame {
 		contentPane.add(radioButton_2);
 		
 		
-		btnActualizar.addActionListener(new PlatillosControlador(this));
-		btnAnterior.addActionListener(new PlatillosControlador(this));
-		btnEliminar.addActionListener(new PlatillosControlador(this));
-		btnSiguiente.addActionListener(new PlatillosControlador(this));
-		btnVentanaAtras.addActionListener(new PlatillosControlador(this));
+		btnActualizar.addActionListener(new PlatillosActualizaEliminaController(this));
+		btnAnterior.addActionListener(new PlatillosActualizaEliminaController(this));
+		btnEliminar.addActionListener(new PlatillosActualizaEliminaController(this));
+		btnSiguiente.addActionListener(new PlatillosActualizaEliminaController(this));
+		btnVentanaAtras.addActionListener(new PlatillosActualizaEliminaController(this));
 	}
 
 	/**
