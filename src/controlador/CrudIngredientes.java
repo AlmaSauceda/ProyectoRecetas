@@ -1,4 +1,4 @@
-package modelo;
+package controlador;
 
 import vistas.IngredientesGestionar;
 import vistas.IngredientesRegistrar;

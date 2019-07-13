@@ -30,6 +30,7 @@ public class IngredientesRegistrar extends JFrame {
 	private JButton btnRegistrar;
 	private JButton btnAtrasVentana;
 	private JComboBox cmbIngrediente;
+	private JTextField txt_Costo;
 
 	/**
 	 * Create the frame.
@@ -43,7 +44,7 @@ public class IngredientesRegistrar extends JFrame {
 		setResizable(false);
 		setBackground(new Color(255, 165, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 511, 317);
+		setBounds(100, 100, 512, 354);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 165, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,7 +89,7 @@ public class IngredientesRegistrar extends JFrame {
 		txtMarca.setColumns(10);
 
 		lblCaducidad = new JLabel("Caducidad: ");
-		lblCaducidad.setBounds(44, 204, 83, 18);
+		lblCaducidad.setBounds(39, 202, 83, 18);
 		lblCaducidad.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		contentPane.add(lblCaducidad);
 
@@ -98,7 +99,7 @@ public class IngredientesRegistrar extends JFrame {
 		txtCaducidad.setColumns(10);
 
 		btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(252, 249, 110, 30);
+		btnRegistrar.setBounds(242, 278, 110, 30);
 		btnRegistrar.setPreferredSize(new Dimension(110, 30));
 		btnRegistrar.setForeground(new Color(255, 165, 0));
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -106,12 +107,22 @@ public class IngredientesRegistrar extends JFrame {
 		contentPane.add(btnRegistrar);
 
 		btnAtrasVentana = new JButton("Atr\u00E1s");
-		btnAtrasVentana.setBounds(372, 249, 110, 30);
+		btnAtrasVentana.setBounds(362, 278, 110, 30);
 		btnAtrasVentana.setPreferredSize(new Dimension(110, 30));
 		btnAtrasVentana.setForeground(new Color(255, 165, 0));
 		btnAtrasVentana.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAtrasVentana.setBackground(SystemColor.controlHighlight);
 		contentPane.add(btnAtrasVentana);
+		
+		JLabel lblCosto = new JLabel("Costo:");
+		lblCosto.setFont(new Font("Cambria Math", Font.BOLD, 15));
+		lblCosto.setBounds(39, 231, 83, 18);
+		contentPane.add(lblCosto);
+		
+		txt_Costo = new JTextField();
+		txt_Costo.setBounds(203, 234, 110, 20);
+		contentPane.add(txt_Costo);
+		txt_Costo.setColumns(10);
 		
 		btnAtrasVentana.addActionListener(new IngredientesControlador(this));
 		btnRegistrar.addActionListener(new IngredientesControlador(this));
@@ -119,18 +130,76 @@ public class IngredientesRegistrar extends JFrame {
 	/**
 	 * @return the btnRegistrar
 	 */
-	public Object getBtnRegistrar() {
+
+
+	public String getTxtNombre() {
+		return txtNombre.getText();
+	}
+
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+
+	public String getTxtMarca() {
+		return txtMarca.getText();
+	}
+
+
+	public void setTxtMarca(JTextField txtMarca) {
+		this.txtMarca = txtMarca;
+	}
+
+
+	public String getTxtCaducidad() {
+		return txtCaducidad.getText();
+	}
+
+
+	public void setTxtCaducidad(JTextField txtCaducidad) {
+		this.txtCaducidad = txtCaducidad;
+	}
+
+
+	public JButton getBtnRegistrar() {
 		return btnRegistrar;
 	}
 
 
-	/**
-	 * @return the btnAtrasVentana
-	 */
-	public Object getBtnAtrasVentana() {
+	public void setBtnRegistrar(JButton btnRegistrar) {
+		this.btnRegistrar = btnRegistrar;
+	}
+
+
+	public JButton getBtnAtrasVentana() {
 		return btnAtrasVentana;
+	}
+
+
+	public void setBtnAtrasVentana(JButton btnAtrasVentana) {
+		this.btnAtrasVentana = btnAtrasVentana;
+	}
+
+
+	public String getCmbIngrediente() {
+		return (String) cmbIngrediente.getSelectedItem();
+	}
+
+
+	public void setCmbIngrediente(JComboBox cmbIngrediente) {
+		this.cmbIngrediente = cmbIngrediente;
+	}
+
+
+	public String getTxt_Costo() {
+		return txt_Costo.getText();
+	}
+
+
+	public void setTxt_Costo(JTextField txt_Costo) {
+		this.txt_Costo = txt_Costo;
 	}
 	
 	
-
 }
