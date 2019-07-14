@@ -1,8 +1,9 @@
 package modelo;
 
 import java.sql.SQLException;
+import java.util.List;
 
-import model.db.Dao;
+import model.db.DaoPlatillos;
 
 /**
  * Develop by joseline
@@ -13,15 +14,19 @@ import model.db.Dao;
 
 public class ModelPlatillos {
 	
-	private Dao dao;
+	private DaoPlatillos dao;
 	
 	public ModelPlatillos(){
 	
-		dao=new Dao();
+		dao=new DaoPlatillos();
 	}
 	
 	public void registrarPlato(Platillos platillos) throws ClassNotFoundException, SQLException {
 		dao.registrarPlatillos(platillos);
+	}
+
+	public List<Platillos> getPlatillos() throws ClassNotFoundException, SQLException {
+		return dao.getDatos();
 	}
 
 }

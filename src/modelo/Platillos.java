@@ -53,6 +53,11 @@ public class Platillos {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
+	@Override
+	public String toString() {
+		return "Platillos [id_platillo=" + id_platillo + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", categoria=" + categoria + ", nacionalidad=" + nacionalidad + ", costo=" + costo + "]";
+	}
 	
 	
 }//end class

@@ -2,15 +2,15 @@ package modelo;
 
 import java.sql.SQLException;
 
-import model.db.Dao;
+import model.db.DaoPlatillos;
 
 public class ModelIngredientes {
 
-private Dao dao;
+private DaoPlatillos dao;
 	
 	public ModelIngredientes(){
 	
-		dao=new Dao();
+		dao=new DaoPlatillos();
 	}
 	
 	public void registrarIngrediente(Ingredientes ingrediente) throws ClassNotFoundException, SQLException {
