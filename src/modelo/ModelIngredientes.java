@@ -1,6 +1,8 @@
 package modelo;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.db.Dao;
 
@@ -15,5 +17,9 @@ private Dao dao;
 	
 	public void registrarIngrediente(Ingredientes ingrediente) throws ClassNotFoundException, SQLException {
 		dao.registrarIngredientes(ingrediente);
+	}
+	
+	public ArrayList<Ingredientes> consultarIngrediente() throws ClassNotFoundException, SQLException {
+		return dao.consultarIngredientes();
 	}
 }

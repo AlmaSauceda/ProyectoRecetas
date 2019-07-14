@@ -31,6 +31,7 @@ public class IngredientesRegistrar extends JFrame {
 	private JButton btnAtrasVentana;
 	private JComboBox cmbIngrediente;
 	private JTextField txt_Costo;
+	private JLabel label;
 
 	/**
 	 * Create the frame.
@@ -124,6 +125,11 @@ public class IngredientesRegistrar extends JFrame {
 		contentPane.add(txt_Costo);
 		txt_Costo.setColumns(10);
 		
+		label = new JLabel("$");
+		label.setFont(new Font("Cambria Math", Font.BOLD, 15));
+		label.setBounds(183, 235, 18, 18);
+		contentPane.add(label);
+		
 		btnAtrasVentana.addActionListener(new IngredientesControlador(this));
 		btnRegistrar.addActionListener(new IngredientesControlador(this));
 	}
@@ -197,8 +203,8 @@ public class IngredientesRegistrar extends JFrame {
 	}
 
 
-	public void setTxt_Costo(JTextField txt_Costo) {
-		this.txt_Costo = txt_Costo;
+	public void setTxt_Costo(String txt_Costo) {
+		this.txt_Costo.setText(txt_Costo);
 	}
 	
 	
