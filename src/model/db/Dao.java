@@ -2,10 +2,16 @@ package model.db;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.db.ConectionPostgresql;
 import modelo.Ingredientes;
 import modelo.Platillos;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;  
+
 
 public class Dao {
 
@@ -25,7 +31,6 @@ public class Dao {
 
 	}
 
-	// Pendiente
 	public void registrarIngredientes(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
@@ -40,5 +45,36 @@ public class Dao {
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 
+	}
+	
+	//pendiente
+	public ArrayList<Ingredientes> consultarIngredientes() throws SQLException, ClassNotFoundException {
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+		
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
+				"SELECT * FROM receta.ingredientes order by id_ingrediente");
+				
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		ArrayList<Ingredientes> listaIng = new ArrayList<Ingredientes>();
+		
+	    while (resultSet.next()) {
+			
+	    	Ingredientes ing = new Ingredientes();
+			
+			ing.setId_ingrediente(resultSet.getInt("id_ingrediente"));
+			ing.setNombre(resultSet.getString("nombre"));
+			ing.setTipo(resultSet.getString("tipo"));
+			ing.setMarca(resultSet.getString("marca"));			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");			
+			ing.setCaducidad( dateFormat.format(resultSet.getDate("caducidad")));
+						
+			ing.setCosto(resultSet.getDouble("costo"));
+			
+            System.out.println(ing);
+            listaIng.add(ing);
+        }		
+		preparedStatement.close();		
+		return listaIng;
 	}
 }
