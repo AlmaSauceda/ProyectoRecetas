@@ -73,9 +73,11 @@ public class RecetasControlador implements ActionListener {
 				System.out.println("Aqui va Actualizar");
 			} else if (source == recGes.getBtnAnterior()) {
 
+				if (indiceDet > 0) {
+					indiceDet--;
+				}
 				if (indice > 0) {
 					indice--;
-					indiceDet--;
 				} else {
 					JOptionPane.showMessageDialog(null, "Este es el primer registro");
 				}
@@ -109,6 +111,7 @@ public class RecetasControlador implements ActionListener {
 
 	private void consultarDetalle() {
 		if (listaDetRece.size() > 0) {
+			recGes.setTable(crudRec.eliminarValoresTabla(recGes.getTable()));
 			int numCols = recGes.getTable().getModel().getColumnCount();
 			Object[] fila = new Object[numCols];
 			fila[0] = listaDetRece.get(indiceDet).getId_ingrediente();
