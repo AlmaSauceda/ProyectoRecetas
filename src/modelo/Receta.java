@@ -13,7 +13,7 @@ public class Receta {
 	private String titulo;
 	private String procedimiento;
 	private String terminologia;
-	private String comensales;
+	private int comensales;
 	
 	//getter y setters
 	
@@ -47,10 +47,10 @@ public class Receta {
 	public void setTerminologia(String terminologia) {
 		this.terminologia = terminologia;
 	}
-	public String getComensales() {
+	public int getComensales() {
 		return comensales;
 	}
-	public void setComensales(String comensales) {
+	public void setComensales(int comensales) {
 		this.comensales = comensales;
 	}
 	

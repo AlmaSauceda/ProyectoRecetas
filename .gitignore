@@ -8,3 +8,5 @@ bin/controlador/IngredientesControlador.class
 bin/model/db/Dao.class
 bin/modelo/CrudIngredientes.class
 bin/vistas/IngredientesRegistrar.class
+hs_err_pid736.log
+replay_pid736.log
