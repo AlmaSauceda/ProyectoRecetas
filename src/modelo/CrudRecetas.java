@@ -34,6 +34,7 @@ public class CrudRecetas {
 	public JComboBox cargarCombo(JComboBox combo, String tabla) {
 		String consulta = "SELECT Nombre FROM " + tabla;
 		try {
+
 			conexion = ConectionPostgresql.getInstance();
 			PreparedStatement ps = conexion.getStatement(consulta);
 			ResultSet rs = ps.executeQuery();
@@ -102,7 +103,7 @@ public class CrudRecetas {
 			ps.setString(4, comensales);
 			ps.setInt(5, id_platillos);
 			ps.executeUpdate();
-			ps.close();
+			// ps.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -142,8 +143,95 @@ public class CrudRecetas {
 		}
 	}
 
-	public void registrarDetReceta(JTable table) {
-		// TODO Auto-generated method stub
+	public JTable registrarDetReceta(JTable table) {
 
+		if (table.getRowCount() > 0) {
+			for (int i = 0; i < table.getRowCount(); i++) {
+
+				try {
+					String consulta = "INSERT INTO detalle_receta(cantidad , porcion ,implementacion, id_ingrediente , id_receta) VALUES(?,?,?,?,?)";
+					conexion = ConectionPostgresql.getInstance();
+					PreparedStatement ps = conexion.getStatement(consulta);
+					ps.setInt(1, Integer.parseInt(table.getValueAt(i, 1).toString()));
+					
+					ps.setString(2, table.getValueAt(i, 2).toString());
+					ps.setString(3, table.getValueAt(i, 3).toString());
+					ps.setInt(4, recuperarIdIngrediente(table.getValueAt(i, 0).toString()));
+					ps.setInt(5, recuperarIdReceta());
+					ps.executeUpdate();
+					ps.close();
+
+					return eliminarValoresTabla(table);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return eliminarValoresTabla(table);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return eliminarValoresTabla(table);
+				}
+
+			}
+		}
+		return eliminarValoresTabla(table);
+
+	}
+
+	public JTable eliminarValoresTabla(JTable table) {
+		DefaultTableModel tb = (DefaultTableModel) table.getModel();
+		int a = table.getRowCount() - 1;
+		for (int i = a; i >= 0; i--) {
+			tb.removeRow(tb.getRowCount() - 1);
+		}
+		table.setModel(tb);
+		return table;
+	}
+
+	private int recuperarIdReceta() {
+		int id = 0;
+		String consulta = "SELECT id_receta FROM recetas ORDER BY id_receta DESC LIMIT 1 ";
+		try {
+			conexion = ConectionPostgresql.getInstance();
+			PreparedStatement ps = conexion.getStatement(consulta);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				id = (rs.getInt(1));
+			}
+			System.out.println("id receta: " + id);
+			return id;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return id;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return id;
+		}
+	}
+
+	private int recuperarIdIngrediente(String string) {
+		int id = 0;
+		String consulta = "SELECT id_ingrediente FROM ingredientes where nombre = ?";
+		try {
+			conexion = ConectionPostgresql.getInstance();
+			PreparedStatement ps = conexion.getStatement(consulta);
+			ps.setString(1, string);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				id = (rs.getInt(1));
+			}
+			System.out.println("id ingrediente: " + id);
+			return id;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return id;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return id;
+		}
 	}
 }

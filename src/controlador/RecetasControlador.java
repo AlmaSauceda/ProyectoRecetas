@@ -72,7 +72,7 @@ public class RecetasControlador implements ActionListener {
 	private void registrarReceta() {
 		crudRec.RegistrarReceta(recReg.getCmbPlatilloS(), recReg.getTxtTitulo(), recReg.getTxtProcedimiento(),
 				recReg.getTxtTerminologia(), recReg.getTxtComenzales());
-		crudRec.registrarDetReceta(recReg.getTable());
+		recReg.setTable(crudRec.registrarDetReceta(recReg.getTable()));
 		borrarDatos();
 		Messages.showMessage("Registro de receta");
 	}
@@ -82,7 +82,7 @@ public class RecetasControlador implements ActionListener {
 	 * para realizar el llenado de los combos
 	 */
 	public void CargarCombosGes() {
-		recGes.setCmbIngrediente(crudRec.cargarCombo(recGes.getCmbIngrediente(), "platillos"));
+		recGes.setCmbIngrediente(crudRec.cargarCombo(recGes.getCmbIngrediente(), "ingredientes"));
 		recGes.setCmbPlatillo(crudRec.cargarCombo(recGes.getCmbPlatillo(), "platillos"));
 	}
 
@@ -93,7 +93,7 @@ public class RecetasControlador implements ActionListener {
 
 	public void CargarCombosReg() {
 		recReg.setCmbPlatillo(crudRec.cargarCombo(recReg.getCmbPlatillo(), "platillos"));
-		recReg.setCmbIngrediente(crudRec.cargarCombo(recReg.getCmbIngrediente(), "platillos"));
+		recReg.setCmbIngrediente(crudRec.cargarCombo(recReg.getCmbIngrediente(), "ingredientes"));
 	}
 
 	/**
@@ -118,11 +118,11 @@ public class RecetasControlador implements ActionListener {
 		p.setVisible(true);
 		recGes.dispose();
 	}
-	
+
 	/**
 	 * Metodo para limpiar el formulario del JFrame RecetasRegistrar
 	 */
-	
+
 	public void borrarDatos() {
 		recReg.setCmbIngredienteCambio(1);
 		recReg.setCmbPlatillo(1);
