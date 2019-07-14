@@ -120,107 +120,106 @@ public class RecetasGestionar extends JFrame {
 		btnAtrasVentana.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAtrasVentana.setBackground(SystemColor.controlHighlight);
 		contentPane.add(btnAtrasVentana);
-		
+
 		cmbPlatillo = new JComboBox();
-		cmbPlatillo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione"}));
+		cmbPlatillo.setModel(new DefaultComboBoxModel(new String[] { "Seleccione" }));
 		cmbPlatillo.setBounds(166, 55, 293, 20);
 		contentPane.add(cmbPlatillo);
-		
+
 		label = new JLabel("Platillo:");
 		label.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label.setBounds(51, 57, 101, 18);
 		contentPane.add(label);
-		
+
 		label_1 = new JLabel("T\u00EDtulo:");
 		label_1.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_1.setBounds(51, 99, 49, 18);
 		contentPane.add(label_1);
-		
+
 		txtTitulo = new JTextField();
 		txtTitulo.setColumns(10);
 		txtTitulo.setBounds(166, 98, 293, 20);
 		contentPane.add(txtTitulo);
-		
+
 		label_2 = new JLabel("Procedimiento:");
 		label_2.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_2.setBounds(51, 148, 111, 18);
 		contentPane.add(label_2);
-		
+
 		txtProcedimiento = new JTextArea();
 		txtProcedimiento.setRows(6);
 		txtProcedimiento.setLineWrap(true);
 		txtProcedimiento.setColumns(10);
 		txtProcedimiento.setBounds(166, 129, 293, 83);
 		contentPane.add(txtProcedimiento);
-		
+
 		label_3 = new JLabel("Terminolog\u00EDa:");
 		label_3.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_3.setBounds(51, 227, 101, 18);
 		contentPane.add(label_3);
-		
+
 		txtTerminologia = new JTextField();
 		txtTerminologia.setColumns(10);
 		txtTerminologia.setBounds(166, 226, 293, 20);
 		contentPane.add(txtTerminologia);
-		
+
 		label_4 = new JLabel("Comenzales:");
 		label_4.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_4.setBounds(51, 271, 101, 18);
 		contentPane.add(label_4);
-		
+
 		txtComenzales = new JSpinner();
 		txtComenzales.setBounds(166, 270, 130, 20);
 		contentPane.add(txtComenzales);
-		
+
 		label_5 = new JLabel("Implementaci\u00F3n:");
 		label_5.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_5.setBounds(498, 198, 130, 18);
 		contentPane.add(label_5);
-		
+
 		txtImplementacion = new JTextField();
 		txtImplementacion.setColumns(10);
 		txtImplementacion.setBounds(624, 197, 200, 20);
 		contentPane.add(txtImplementacion);
-		
+
 		txtPorcion = new JTextField();
 		txtPorcion.setColumns(10);
 		txtPorcion.setBounds(624, 147, 200, 20);
 		contentPane.add(txtPorcion);
-		
+
 		label_6 = new JLabel("Porci\u00F3n:");
 		label_6.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_6.setBounds(498, 150, 101, 18);
 		contentPane.add(label_6);
-		
+
 		label_7 = new JLabel("Cantidad:");
 		label_7.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_7.setBounds(498, 101, 101, 18);
 		contentPane.add(label_7);
-		
+
 		txtCantidad = new JSpinner();
 		txtCantidad.setBounds(624, 98, 111, 20);
 		contentPane.add(txtCantidad);
-		
+
 		label_8 = new JLabel("Ingredientes:");
 		label_8.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_8.setBounds(498, 59, 101, 18);
 		contentPane.add(label_8);
-		
+
 		cmbIngrediente = new JComboBox();
-		cmbIngrediente.setModel(new DefaultComboBoxModel(new String[] {"Seleccione"}));
+		cmbIngrediente.setModel(new DefaultComboBoxModel(new String[] { "Seleccione" }));
 		cmbIngrediente.setBounds(624, 55, 200, 20);
 		contentPane.add(cmbIngrediente);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(154, 298, 539, 119);
 		contentPane.add(scrollPane);
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "Ingrediente", "Cantidad", "Porci\u00F3n", "Implementaci\u00F3n" }));
-		
+
 		scrollPane.setViewportView(table);
-		
-		
+
 		btnAgregar = new JButton("AGREGAR");
 		btnAgregar.setPreferredSize(new Dimension(110, 30));
 		btnAgregar.setForeground(new Color(255, 165, 0));
@@ -282,8 +281,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @param txtTitulo the txtTitulo to set
 	 */
-	public void setTxtTitulo(JTextField txtTitulo) {
-		this.txtTitulo = txtTitulo;
+	public void setTxtTitulo(String txtTitulo) {
+		this.txtTitulo.setText(txtTitulo);
 	}
 
 	/**
@@ -296,8 +295,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @param txtTerminologia the txtTerminologia to set
 	 */
-	public void setTxtTerminologia(JTextField txtTerminologia) {
-		this.txtTerminologia = txtTerminologia;
+	public void setTxtTerminologia(String txtTerminologia) {
+		this.txtTerminologia.setText(txtTerminologia);
 	}
 
 	/**
@@ -310,8 +309,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @param txtProcedimiento the txtProcedimiento to set
 	 */
-	public void setTxtProcedimiento(JTextArea txtProcedimiento) {
-		this.txtProcedimiento = txtProcedimiento;
+	public void setTxtProcedimiento(String txtProcedimiento) {
+		this.txtProcedimiento.setText(txtProcedimiento);
 	}
 
 	/**
@@ -324,8 +323,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @param txtImplementacion the txtImplementacion to set
 	 */
-	public void setTxtImplementacion(JTextField txtImplementacion) {
-		this.txtImplementacion = txtImplementacion;
+	public void setTxtImplementacion(String txtImplementacion) {
+		this.txtImplementacion.setText(txtImplementacion);
 	}
 
 	/**
@@ -370,6 +369,13 @@ public class RecetasGestionar extends JFrame {
 		this.cmbPlatillo = cmbPlatillo;
 	}
 
+	/**
+	 * @param cmbPlatillo the cmbPlatillo to set
+	 */
+	public void setMandarCmbPlatillo(String cmbPlatillo) {
+		this.cmbPlatillo.setSelectedItem(cmbPlatillo);
+	}
+	
 	/**
 	 * @return the cmbPlatillo en cadena
 	 */
@@ -422,8 +428,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @param txtComenzales the txtComenzales to set
 	 */
-	public void setTxtComenzales(JSpinner txtComenzales) {
-		this.txtComenzales = txtComenzales;
+	public void setTxtComenzales(int txtComenzales) {
+		this.txtComenzales.setValue(txtComenzales);
 	}
 
 }

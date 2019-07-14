@@ -11,7 +11,6 @@ public class ModelIngredientes {
 private Dao dao;
 	
 	public ModelIngredientes(){
-	
 		dao=new Dao();
 	}
 	

@@ -18,6 +18,8 @@ import model.db.ConectionPostgresql;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import View.Dialogs.Messages;
+
 public class CrudRecetas {
 
 	private int index;
@@ -66,7 +68,6 @@ public class CrudRecetas {
 	 */
 	public JTable InsertarFilas(JTable table, String cmbIngrediente, String txtCantidad, String txtPorcion,
 			String txtImplementacion) {
-
 		int numCols = table.getModel().getColumnCount();
 		Object[] fila = new Object[numCols];
 		fila[0] = cmbIngrediente;
@@ -143,17 +144,22 @@ public class CrudRecetas {
 		}
 	}
 
+	/**
+	 * Metodo para insertar datos de la tabla de la vista a la tabla detalle_receta
+	 * 
+	 * @param table
+	 * @return table vacia
+	 */
 	public JTable registrarDetReceta(JTable table) {
 
 		if (table.getRowCount() > 0) {
 			for (int i = 0; i < table.getRowCount(); i++) {
-
 				try {
 					String consulta = "INSERT INTO detalle_receta(cantidad , porcion ,implementacion, id_ingrediente , id_receta) VALUES(?,?,?,?,?)";
 					conexion = ConectionPostgresql.getInstance();
 					PreparedStatement ps = conexion.getStatement(consulta);
 					ps.setInt(1, Integer.parseInt(table.getValueAt(i, 1).toString()));
-					
+
 					ps.setString(2, table.getValueAt(i, 2).toString());
 					ps.setString(3, table.getValueAt(i, 3).toString());
 					ps.setInt(4, recuperarIdIngrediente(table.getValueAt(i, 0).toString()));
@@ -173,11 +179,19 @@ public class CrudRecetas {
 				}
 
 			}
+		}else {
+			Messages.showError("Ingrese los ingredientes de la receta");
 		}
 		return eliminarValoresTabla(table);
 
 	}
 
+	/**
+	 * Metodo para vaciar la tabla y la retorna
+	 * 
+	 * @param table
+	 * @return table
+	 */
 	public JTable eliminarValoresTabla(JTable table) {
 		DefaultTableModel tb = (DefaultTableModel) table.getModel();
 		int a = table.getRowCount() - 1;
@@ -188,6 +202,11 @@ public class CrudRecetas {
 		return table;
 	}
 
+	/**
+	 * Metodo para realizar una consulta para regresar el ID del la ultima receta
+	 * 
+	 * @return
+	 */
 	private int recuperarIdReceta() {
 		int id = 0;
 		String consulta = "SELECT id_receta FROM recetas ORDER BY id_receta DESC LIMIT 1 ";
@@ -198,7 +217,6 @@ public class CrudRecetas {
 			while (rs.next()) {
 				id = (rs.getInt(1));
 			}
-			System.out.println("id receta: " + id);
 			return id;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -211,6 +229,13 @@ public class CrudRecetas {
 		}
 	}
 
+	/**
+	 * Metodo para realizar una consulta para regresar el ID del ingrediente con el
+	 * parametro Nombre
+	 * 
+	 * @param string
+	 * @return id
+	 */
 	private int recuperarIdIngrediente(String string) {
 		int id = 0;
 		String consulta = "SELECT id_ingrediente FROM ingredientes where nombre = ?";
@@ -222,7 +247,29 @@ public class CrudRecetas {
 			while (rs.next()) {
 				id = (rs.getInt(1));
 			}
-			System.out.println("id ingrediente: " + id);
+			return id;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return id;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return id;
+		}
+	}
+
+	public String recuperarNombre(int id_platillo) {
+		String id = "";
+		String consulta = "SELECT nombre FROM platillos where id_platillo= ?";
+		try {
+			conexion = ConectionPostgresql.getInstance();
+			PreparedStatement ps = conexion.getStatement(consulta);
+			ps.setInt(1, id_platillo);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				id = (rs.getString(1));
+			}
 			return id;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

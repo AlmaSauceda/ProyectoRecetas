@@ -8,7 +8,17 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import modelo.CrudRecetas;
+import modelo.DetalleReceta;
+import modelo.Ingredientes;
+import modelo.ModelReceta;
+import modelo.Receta;
 import View.Dialogs.*;
 import vistas.Principal;
 import vistas.RecetasGestionar;
@@ -19,17 +29,28 @@ public class RecetasControlador implements ActionListener {
 	private RecetasGestionar recGes;
 	private RecetasRegistrar recReg;
 	private CrudRecetas crudRec = new CrudRecetas();
+	private ArrayList<Receta> listaRece = new ArrayList<Receta>();
+	private ArrayList<DetalleReceta> listaDetRece = new ArrayList<DetalleReceta>();
+	private int indice = 0;
+	private int indiceDet;
+	private ModelReceta modelRece;
 
 	public RecetasControlador(RecetasGestionar recGes) {
 		this.recGes = recGes;
+		modelRece = new ModelReceta();
+		cargarIngredientes();
+
 	}
 
 	public RecetasControlador(RecetasRegistrar recReg) {
 		this.recReg = recReg;
+		modelRece = new ModelReceta();
+		cargarIngredientes();
 	}
 
 	public RecetasControlador() {
-		// TODO Auto-generated constructor stub
+		modelRece = new ModelReceta();
+		cargarIngredientes();
 	}
 
 	/**
@@ -51,11 +72,32 @@ public class RecetasControlador implements ActionListener {
 			if (source == recGes.getBtnActualizar()) {
 				System.out.println("Aqui va Actualizar");
 			} else if (source == recGes.getBtnAnterior()) {
-				System.out.println("Aqui va Anterior");
+
+				if (indice > 0) {
+					indice--;
+					indiceDet--;
+				} else {
+					JOptionPane.showMessageDialog(null, "Este es el primer registro");
+				}
+				consultar();
+
+				consultarDetalle();
 			} else if (source == recGes.getBtnEliminar()) {
 				System.out.println("Aqui va Eliminar");
 			} else if (source == recGes.getBtnSiguiente()) {
-				System.out.println("Aqui va Siguiente");
+
+				if (indice + 1 < listaRece.size()) {
+					indice++;
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Este es el último registro");
+				}
+
+				if (indiceDet + 1 < listaDetRece.size()) {
+					indiceDet++;
+				}
+				consultar();
+				consultarDetalle();
 			} else if (source == recGes.getBtnAtrasVentana()) {
 				CrearVentanaAtras();
 			} else if (source == recReg.getBtnAgregar()) {
@@ -63,6 +105,48 @@ public class RecetasControlador implements ActionListener {
 						recGes.getTxtCantidad(), recGes.getTxtPorcion(), recGes.getTxtImplementacion()));
 			}
 		}
+	}
+
+	private void consultarDetalle() {
+		if (listaDetRece.size() > 0) {
+			int numCols = recGes.getTable().getModel().getColumnCount();
+			Object[] fila = new Object[numCols];
+			fila[0] = listaDetRece.get(indiceDet).getId_ingrediente();
+			fila[1] = listaDetRece.get(indiceDet).getCantidad();
+			fila[2] = listaDetRece.get(indiceDet).getPorcion();
+			fila[3] = listaDetRece.get(indiceDet).getImplementacion();
+
+			((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
+
+			recGes.setTable(recGes.getTable());
+		}
+	}
+
+	private void consultar() {
+		if (listaRece.size() > 0) {
+			recGes.setMandarCmbPlatillo(crudRec.recuperarNombre(listaRece.get(indice).getId_platillo()));
+			recGes.setTxtTitulo(listaRece.get(indice).getTitulo());
+			recGes.setTxtProcedimiento(listaRece.get(indice).getProcedimiento());
+			recGes.setTxtTerminologia(listaRece.get(indice).getTerminologia());
+			recGes.setTxtComenzales(listaRece.get(indice).getComensales());
+		} else {
+			System.out.println("No hay registros para mostrar");
+		}
+
+	}
+
+	private void cargarIngredientes() {
+		listaRece = new ArrayList<Receta>();
+		try {
+			indice = 0;
+			listaRece = modelRece.consultarReceta();
+			listaDetRece = modelRece.consultarDetalleReceta();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
