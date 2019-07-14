@@ -4,14 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.db.Dao;
+import model.db.DaoIngrediente;
 
 public class ModelIngredientes {
 
-private Dao dao;
+private DaoIngrediente dao;
 	
 	public ModelIngredientes(){
-		dao=new Dao();
+		dao=new DaoIngrediente();
 	}
 	
 	public void registrarIngrediente(Ingredientes ingrediente) throws ClassNotFoundException, SQLException {

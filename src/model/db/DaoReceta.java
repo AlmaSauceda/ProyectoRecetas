@@ -6,9 +6,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelo.DetalleReceta;
+import modelo.Platillos;
 import modelo.Receta;
 
 public class DaoReceta {
+	
+	public void registrarPlatillos(Platillos platillos) throws SQLException, ClassNotFoundException {
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
+				"INSERT INTO platillos (nombre, descripcion, costo, categoria,nacionalidad) VALUES(?,?,?,?,?)");
+
+		preparedStatement.setString(1, platillos.getNombre());
+		preparedStatement.setString(2, platillos.getDescripcion());
+		preparedStatement.setString(4, platillos.getCategoria());
+		preparedStatement.setDouble(3, platillos.getCosto());
+		preparedStatement.setString(5, platillos.getNacionalidad());
+
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
+
+	}
 
 	public ArrayList<Receta> consultarRecetas() throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
