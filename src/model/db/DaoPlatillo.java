@@ -1,19 +1,14 @@
 package model.db;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.db.ConectionPostgresql;
-import modelo.Ingredientes;
 import modelo.Platillos;
 
-
-
-public class DaoPlatillos {
+public class DaoPlatillo {
 
 	public void registrarPlatillos(Platillos platillos) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
@@ -31,22 +26,7 @@ public class DaoPlatillos {
 
 	}
 
-	// Pendiente
-	public void registrarIngredientes(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
-		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
-		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
-				"INSERT INTO receta.ingredientes (nombre, tipo, marca, caducidad,costo) VALUES(?,?,?,?,?)");
 
-		preparedStatement.setString(1, ingrediente.getNombre());
-		preparedStatement.setString(2, ingrediente.getTipo());
-		preparedStatement.setString(3, ingrediente.getMarca());
-		preparedStatement.setDate(4, Date.valueOf(ingrediente.getCaducidad()));
-		preparedStatement.setDouble(5, ingrediente.getCosto());
-
-		preparedStatement.executeUpdate();
-		preparedStatement.close();
-
-	}
 	
 	public List<Platillos> getDatos() throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
@@ -78,6 +58,5 @@ public class DaoPlatillos {
 
 		return listPlatillos;
 	}
-	
 	
 }
