@@ -143,8 +143,8 @@ public class IngredientesRegistrar extends JFrame {
 	}
 
 
-	public void setTxtNombre(JTextField txtNombre) {
-		this.txtNombre = txtNombre;
+	public void setTxtNombre(String txtNombre) {
+		this.txtNombre.setText(txtNombre);
 	}
 
 
@@ -153,8 +153,8 @@ public class IngredientesRegistrar extends JFrame {
 	}
 
 
-	public void setTxtMarca(JTextField txtMarca) {
-		this.txtMarca = txtMarca;
+	public void setTxtMarca(String txtMarca) {
+		this.txtMarca.setText(txtMarca);
 	}
 
 
@@ -163,8 +163,8 @@ public class IngredientesRegistrar extends JFrame {
 	}
 
 
-	public void setTxtCaducidad(JTextField txtCaducidad) {
-		this.txtCaducidad = txtCaducidad;
+	public void setTxtCaducidad(String txtCaducidad) {
+		this.txtCaducidad.setText(txtCaducidad);
 	}
 
 
@@ -193,8 +193,8 @@ public class IngredientesRegistrar extends JFrame {
 	}
 
 
-	public void setCmbIngrediente(JComboBox cmbIngrediente) {
-		this.cmbIngrediente = cmbIngrediente;
+	public void setCmbIngrediente(String cmbIngrediente) {
+		this.cmbIngrediente.setSelectedItem(cmbIngrediente);
 	}
 
 

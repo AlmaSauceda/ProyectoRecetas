@@ -20,22 +20,22 @@ import javax.swing.DefaultComboBoxModel;
 public class IngredientesGestionar extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNombre;
-	private JTextField txtMarca;
-	private JTextField txtCaducidad;
+	public JTextField txtNombre;
+	public JTextField txtMarca;
+	public JTextField txtCaducidad;
 	private JLabel lblRegistrarIngredientes;
 	private JLabel lblNewLabel;
 	private JLabel lblTipo;
 	private JLabel lblMarca;
 	private JLabel lblCaducidad;
-	private JButton btnAnterior;
-	private JButton btnSiguiente;
-	private JButton btnActualizar;
-	private JButton btnEliminar;
-	private JButton btnAtrasVentana;
-	private JComboBox cmbTipoIn;
+	public JButton btnAnterior;
+	public JButton btnSiguiente;
+	public JButton btnActualizar;
+	public JButton btnEliminar;
+	public JButton btnAtrasVentana;
+	public JComboBox cmbTipoIn;
 	private JLabel label;
-	private JTextField txt_Costo;
+	public JTextField txt_Costo;
 	private JLabel label_1;
 
 	//IngredientesGestionar ig;
@@ -146,9 +146,9 @@ public class IngredientesGestionar extends JFrame {
 		contentPane.add(btnAtrasVentana);
 
 		cmbTipoIn = new JComboBox();
-		cmbTipoIn.setFont(new Font("Tahoma", Font.BOLD, 11));
-		cmbTipoIn.setEditable(true);
 		cmbTipoIn.setEnabled(false);
+		cmbTipoIn.setEditable(true);
+		cmbTipoIn.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cmbTipoIn.setModel(new DefaultComboBoxModel(new String[] {"-Seleccione-", "Frutas", "Verduras", "Carnes", "Especias"}));
 		cmbTipoIn.setBounds(210, 124, 221, 20);
 		contentPane.add(cmbTipoIn);
@@ -159,6 +159,7 @@ public class IngredientesGestionar extends JFrame {
 		contentPane.add(label);
 		
 		txt_Costo = new JTextField();
+		txt_Costo.setEditable(false);
 		txt_Costo.setBounds(210, 224, 109, 20);
 		contentPane.add(txt_Costo);
 		txt_Costo.setColumns(10);

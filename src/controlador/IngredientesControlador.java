@@ -46,7 +46,16 @@ public class IngredientesControlador implements ActionListener {
 		if (ingreGes != null) {
 			
 			if (source == ingreGes.getBtnActualizar()) {
-				System.out.println("Aqui va Actualizar");
+				
+				if(ingreGes.btnActualizar.getText().equals("ACTUALIZAR")){
+					habilitarCampos();
+				}else{
+					actualizar();
+					deshabilitarCampos();
+					cargarIngredientes();
+					consultar();
+				}
+				
 			} else if (source == ingreGes.getBtnAnterior()) {
 				
 				if(indice > 0){
@@ -57,7 +66,15 @@ public class IngredientesControlador implements ActionListener {
 				consultar();
 				
 			} else if (source == ingreGes.getBtnEliminar()) {
-				System.out.println("Aqui va Eliminar");
+				
+				if(ingreGes.btnEliminar.getText().equals("Cancelar")){
+					deshabilitarCampos();
+					cargarIngredientes();
+				}else{
+					eliminar();
+					cargarIngredientes();					
+				}
+				consultar();
 			} else if (source == ingreGes.getBtnSiguiente()) {
 
 				if(indice + 1 < listaIng.size()){
@@ -76,6 +93,7 @@ public class IngredientesControlador implements ActionListener {
 			} else if (source == viewIngrediente.getBtnRegistrar()) {
 				System.out.println("Entro a controlador");
 				registrar();
+				limpiar();
 			}
 		}
 	}
@@ -113,8 +131,18 @@ public class IngredientesControlador implements ActionListener {
 			ingreGes.setTxtMarca(listaIng.get(indice).getMarca());
 			ingreGes.setTxtCaducidad(listaIng.get(indice).getCaducidad());
 			ingreGes.setTxt_Costo(String.valueOf(listaIng.get(indice).getCosto()));
+			ingredientes=listaIng.get(indice);
 		}else{
-			System.out.println("No hay registros para mostrar");
+			JOptionPane.showMessageDialog(null, "No hay registros para mostrar");
+			ingreGes.btnActualizar.setEnabled(false);
+			ingreGes.btnAnterior.setEnabled(false);
+			ingreGes.btnSiguiente.setEnabled(false);
+			ingreGes.btnEliminar.setEnabled(false);
+			ingreGes.setTxtNombre("");
+			ingreGes.setCmbTipoIn("");
+			ingreGes.setTxtMarca("");
+			ingreGes.setTxtCaducidad("");
+			ingreGes.setTxt_Costo("");
 		}		
 	}
 
@@ -130,4 +158,73 @@ public class IngredientesControlador implements ActionListener {
 		}			
 	}
 	
+	public void limpiar(){
+		viewIngrediente.setTxtNombre("");
+		viewIngrediente.setCmbIngrediente("-Seleccione-");
+		viewIngrediente.setTxtMarca("");
+		viewIngrediente.setTxtCaducidad("");
+		viewIngrediente.setTxt_Costo("");
+	}
+	
+	public void deshabilitarCampos(){
+		ingreGes.txtNombre.setEditable(false);
+		ingreGes.cmbTipoIn.setEnabled(false);;
+		ingreGes.txtMarca.setEditable(false);
+		ingreGes.txtCaducidad.setEditable(false);
+		ingreGes.txt_Costo.setEditable(false);
+		ingreGes.btnAnterior.setEnabled(true);
+		ingreGes.btnSiguiente.setEnabled(true);
+		ingreGes.btnActualizar.setText("ACTUALIZAR");
+		ingreGes.btnEliminar.setText("ELIMINAR");
+	}
+	
+	public void habilitarCampos(){
+		ingreGes.txtNombre.setEditable(true);
+		ingreGes.cmbTipoIn.setEnabled(true);;
+		ingreGes.txtMarca.setEditable(true);
+		ingreGes.txtCaducidad.setEditable(true);
+		ingreGes.txt_Costo.setEditable(true);
+		ingreGes.btnAnterior.setEnabled(false);
+		ingreGes.btnSiguiente.setEnabled(false);
+		ingreGes.btnActualizar.setText("Guardar");
+		ingreGes.btnEliminar.setText("Cancelar");
+	}
+	
+	public void  actualizar(){
+		
+		ingredientes.setNombre(ingreGes.getTxtNombre());
+		ingredientes.setTipo(ingreGes.getCmbTipoIn());
+		ingredientes.setMarca(ingreGes.getTxtMarca());
+		ingredientes.setCaducidad(ingreGes.getTxtCaducidad());
+		ingredientes.setCosto(Double.parseDouble(ingreGes.getTxt_Costo()));
+
+		System.out.println("" + ingredientes.getNombre() + ingredientes.getTipo() + ingredientes.getMarca()
+				+ ingredientes.getCaducidad() + ingredientes.getCosto());
+		
+		try {
+			modelIngr.actualizarIngrediente(ingredientes);
+			Messages.showMessage("\nSe actualizó correctamente");
+		} catch (ClassNotFoundException e) {
+			Messages.showError("\nNo se actualizó\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Messages.showError("\nNo se actualizó\n" + e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminar(){
+		try {
+			modelIngr.eliminarIngrediente(ingredientes);;
+			Messages.showMessage("\nSe eliminó correctamente");
+		} catch (ClassNotFoundException e) {
+			Messages.showError("\nNo se eliminó\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Messages.showError("\nNo se eliminó\n" + e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

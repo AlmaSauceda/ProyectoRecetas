@@ -21,4 +21,12 @@ private DaoIngrediente dao;
 	public ArrayList<Ingredientes> consultarIngrediente() throws ClassNotFoundException, SQLException {
 		return dao.consultarIngredientes();
 	}
+	
+	public void actualizarIngrediente(Ingredientes ingrediente) throws ClassNotFoundException, SQLException{
+		dao.actualizarIngrediente(ingrediente);
+	}
+	
+	public void eliminarIngrediente(Ingredientes ingrediente) throws ClassNotFoundException, SQLException{
+		dao.eliminarIngrediente(ingrediente);
+	}
 }
