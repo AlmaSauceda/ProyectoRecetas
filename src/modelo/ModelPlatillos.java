@@ -2,8 +2,7 @@
 package modelo;
 
 import java.sql.SQLException;
-import java.util.List;
-
+import java.util.ArrayList;
 import model.db.DaoPlatillo;
 
 /**
@@ -22,12 +21,22 @@ public class ModelPlatillos {
 		dao=new DaoPlatillo();
 	}
 	
-	public void registrarPlato(Platillos platillos) throws ClassNotFoundException, SQLException {
-		dao.registrarPlatillos(platillos);
+	public void addPlatillos(Platillos platillos) throws ClassNotFoundException, SQLException {
+		dao.addPlatillo(platillos);
 	}
 
-	public List<Platillos> getPlatillos() throws ClassNotFoundException, SQLException {
+	
+
+	public ArrayList<Platillos> getPlatillos() throws ClassNotFoundException, SQLException {
 		return dao.getDatos();
+	}
+
+	public void updatePlatillos(Platillos platillos) throws ClassNotFoundException, SQLException{
+		dao.updatePlatillo(platillos);
+	}
+	
+	public void deletePlatillos(Platillos platillos) throws ClassNotFoundException, SQLException{
+		dao.deletePlatillo(platillos);
 	}
 
 }

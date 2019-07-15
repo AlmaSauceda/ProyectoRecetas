@@ -4,16 +4,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-
 import modelo.Platillos;
 
 public class DaoPlatillo {
 
-	public void registrarPlatillos(Platillos platillos) throws SQLException, ClassNotFoundException {
+	private static final String _ADD="INSERT INTO platillos (nombre, descripcion, costo, categoria,nacionalidad) VALUES(?,?,?,?,?)";
+	private static final String _ALL="SELECT * FROM platillos order by id_platillo ;";
+	private static final String _DELETE = "DELETE FROM platillos  WHERE id_platillo=?";
+	private static final String _UPDATE = "UPDATE platillos SET nombre=?,"
+			+ "descripcion=?,costo=?,categoria=?,nacionalidad=? WHERE id_platillo=?";
+	
+	public void addPlatillo(Platillos platillos) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
-		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
-				"INSERT INTO platillos (nombre, descripcion, costo, categoria,nacionalidad) VALUES(?,?,?,?,?)");
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_ADD);
 
 		preparedStatement.setString(1, platillos.getNombre());
 		preparedStatement.setString(2, platillos.getDescripcion());
@@ -28,20 +31,18 @@ public class DaoPlatillo {
 
 
 	
-	public List<Platillos> getDatos() throws SQLException, ClassNotFoundException {
+	public ArrayList<Platillos> getDatos() throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
-		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
-				"SELECT * FROM platillos;");
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_ALL);
 
 		ResultSet tableResultSet = preparedStatement.executeQuery();
 
-		Platillos platillos;
 
-		List<Platillos> listPlatillos = new ArrayList<Platillos>();
+		ArrayList<Platillos> listPlatillos = new ArrayList<Platillos>();
 
 		while (tableResultSet.next()) {
 			
-			platillos = new Platillos();
+			Platillos platillos = new Platillos();
 			
 			platillos.setId_platillo(tableResultSet.getInt(1));
 			platillos.setNombre(tableResultSet.getString(2));
@@ -59,4 +60,30 @@ public class DaoPlatillo {
 		return listPlatillos;
 	}
 	
+	public void deletePlatillo(Platillos platillo) throws SQLException, ClassNotFoundException{
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_DELETE);
+
+		preparedStatement.setInt(1, platillo.getId_platillo());
+
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
+	}
+	
+public void updatePlatillo(Platillos platillos) throws SQLException, ClassNotFoundException{
+		
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_UPDATE);
+
+
+		preparedStatement.setString(1, platillos.getNombre());
+		preparedStatement.setString(2, platillos.getDescripcion());
+		preparedStatement.setDouble(3, platillos.getCosto());
+		preparedStatement.setString(4, platillos.getCategoria());
+		preparedStatement.setString(5, platillos.getNacionalidad());
+		preparedStatement.setInt(6, platillos.getId_platillo());
+
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
+	}
 }

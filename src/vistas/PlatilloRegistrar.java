@@ -53,14 +53,15 @@ public class PlatilloRegistrar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 165, 0));
+		contentPane.setBackground(new Color(255, 204, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		lblRegistrarIngredientes = new JLabel("REGISTRAR PLATILLO");
+		lblRegistrarIngredientes.setBackground(new Color(102, 102, 102));
 		lblRegistrarIngredientes.setBounds(82, 11, 273, 33);
-		lblRegistrarIngredientes.setForeground(new Color(255, 255, 255));
+		lblRegistrarIngredientes.setForeground(new Color(102, 102, 102));
 		lblRegistrarIngredientes.setFont(new Font("Andalus", Font.BOLD, 25));
 		contentPane.add(lblRegistrarIngredientes);
 
@@ -108,30 +109,30 @@ public class PlatilloRegistrar extends JFrame {
 		jcbCtegorias = new JComboBox<>();
 		jcbCtegorias.setModel(new DefaultComboBoxModel<String>(new String[] {"Selecciona...", "Desayuno", 
 				"Comida","Cena"}));
-		jcbCtegorias.setBounds(190, 186, 190, 30);
+		jcbCtegorias.setBounds(151, 202, 204, 30);
 
 		
 		contentPane.add(jcbCtegorias);
 		lblNacionalidad = new JLabel("Nacionalidad:");
-		lblNacionalidad.setBounds(39, 230, 73, 18);
+		lblNacionalidad.setBounds(39, 247, 102, 18);
 		lblNacionalidad.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		contentPane.add(lblNacionalidad);
 		
 		txtNacionalidad = new JTextField();
-		txtNacionalidad.setBounds(150, 230, 100, 20);
+		txtNacionalidad.setBounds(151, 243, 204, 22);
 		contentPane.add(txtNacionalidad);
 		txtNacionalidad.setColumns(10);
 
 		btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(161, 251, 110, 30);
+		btnRegistrar.setBounds(117, 290, 110, 30);
 		btnRegistrar.setPreferredSize(new Dimension(110, 30));
 		btnRegistrar.setForeground(new Color(255, 165, 0));
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnRegistrar.setBackground(new Color(255, 255, 204));
+		btnRegistrar.setBackground(SystemColor.controlHighlight);
 		contentPane.add(btnRegistrar);
 
 		btnAtrasVentana = new JButton("Atr\u00E1s");
-		btnAtrasVentana.setBounds(281, 251, 110, 30);
+		btnAtrasVentana.setBounds(273, 290, 110, 30);
 
 		btnAtrasVentana.setPreferredSize(new Dimension(110, 30));
 		btnAtrasVentana.setForeground(new Color(255, 165, 0));
@@ -174,8 +175,36 @@ public class PlatilloRegistrar extends JFrame {
 	}
 
 	
+
+	public int getJcbCategorias() {
+		return jcbCtegorias.getSelectedIndex();
+	}
+	
+	
 	public String getSelectedItem() {
 		return (String) jcbCtegorias.getSelectedItem();
 	} 
+	
+	public void setTxtNombre(String txtNombre) {
+		this.txtNombre.setText(txtNombre);
+	}
+
+	public void setTxtCosto(String txtCosto) {
+		this.txtCosto.setText(txtCosto);
+	}
+
+	public void setTxtDescripcion(String txtDescripcion) {
+		this.txtDescripcion.setText(txtDescripcion);
+	}
+	
+
+	public void setTxtNacionalidad(String txtNacionalidad) {
+		this.txtNacionalidad.setText(txtNacionalidad);
+	}
+
+	
+	public void setJcbCtegorias(int i) {
+		this.jcbCtegorias.setSelectedIndex(i);
+	}
 	
 }

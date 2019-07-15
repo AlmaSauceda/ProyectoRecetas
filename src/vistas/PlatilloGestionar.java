@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.IngredientesControlador;
 import controlador.PlatillosActualizaEliminaController;
 
 import java.awt.Color;
@@ -11,10 +12,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JTextArea;
-import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 
 public class PlatilloGestionar extends JFrame {
 
@@ -35,6 +37,9 @@ public class PlatilloGestionar extends JFrame {
 	private JButton btnActualizar;
 	private JButton btnEliminar;
 	private JButton btnVentanaAtras;
+	private JTextField txtNacionalidad;
+	private JComboBox<String> jcbCtegorias;
+	
 
 	/**
 	 * Create the frame.
@@ -43,20 +48,20 @@ public class PlatilloGestionar extends JFrame {
 		createGui();
 	}
 
-	public void createGui() {
+	private void createGui() {
 		setResizable(false);
 		setBackground(new Color(255, 165, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 458, 395);
+		setBounds(100, 100, 458, 433);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 165, 0));
+		contentPane.setBackground(new Color(255, 204, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		lblRegistrarIngredientes = new JLabel("CONSULTAR PLATILLOS");
 		lblRegistrarIngredientes.setBounds(78, 11, 299, 33);
-		lblRegistrarIngredientes.setForeground(new Color(255, 255, 255));
+		lblRegistrarIngredientes.setForeground(new Color(102, 102, 102));
 		lblRegistrarIngredientes.setFont(new Font("Andalus", Font.BOLD, 25));
 		contentPane.add(lblRegistrarIngredientes);
 
@@ -105,7 +110,7 @@ public class PlatilloGestionar extends JFrame {
 		contentPane.add(label_10);
 
 		btnAnterior = new JButton("ANTERIOR");
-		btnAnterior.setBounds(29, 248, 110, 30);
+		btnAnterior.setBounds(12, 281, 110, 30);
 		btnAnterior.setPreferredSize(new Dimension(110, 30));
 		btnAnterior.setForeground(new Color(255, 165, 0));
 		btnAnterior.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -113,7 +118,7 @@ public class PlatilloGestionar extends JFrame {
 		contentPane.add(btnAnterior);
 
 		btnSiguiente = new JButton("SIGUIENTE");
-		btnSiguiente.setBounds(332, 248, 110, 30);
+		btnSiguiente.setBounds(332, 281, 110, 30);
 		btnSiguiente.setPreferredSize(new Dimension(110, 30));
 		btnSiguiente.setForeground(new Color(255, 165, 0));
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -121,7 +126,7 @@ public class PlatilloGestionar extends JFrame {
 		contentPane.add(btnSiguiente);
 
 		btnActualizar = new JButton("ACTUALIZAR");
-		btnActualizar.setBounds(119, 289, 110, 30);
+		btnActualizar.setBounds(119, 322, 110, 30);
 
 		btnActualizar.setPreferredSize(new Dimension(110, 50));
 		btnActualizar.setForeground(new Color(255, 165, 0));
@@ -130,7 +135,7 @@ public class PlatilloGestionar extends JFrame {
 		contentPane.add(btnActualizar);
 
 		btnEliminar = new JButton("ELIMINAR");
-		btnEliminar.setBounds(234, 289, 110, 30);
+		btnEliminar.setBounds(236, 322, 110, 30);
 		btnEliminar.setPreferredSize(new Dimension(110, 50));
 		btnEliminar.setForeground(new Color(255, 165, 0));
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -138,7 +143,7 @@ public class PlatilloGestionar extends JFrame {
 		contentPane.add(btnEliminar);
 
 		btnVentanaAtras = new JButton("Atr\u00E1s");
-		btnVentanaAtras.setBounds(185, 329, 110, 30);
+		btnVentanaAtras.setBounds(184, 363, 110, 30);
 
 		btnVentanaAtras.setPreferredSize(new Dimension(110, 30));
 		btnVentanaAtras.setForeground(new Color(255, 165, 0));
@@ -146,61 +151,135 @@ public class PlatilloGestionar extends JFrame {
 		btnVentanaAtras.setBackground(SystemColor.controlHighlight);
 		contentPane.add(btnVentanaAtras);
 		
-		JRadioButton radioButton = new JRadioButton("Comida");
-		radioButton.setBackground(new Color(255, 165, 0));
-		radioButton.setBounds(243, 205, 83, 23);
-		contentPane.add(radioButton);
+		jcbCtegorias = new JComboBox<String>();
+		jcbCtegorias.setBounds(162, 201, 204, 30);
+		jcbCtegorias.setModel(new DefaultComboBoxModel<String>(new String[] {"Selecciona...", "Desayuno", 
+				"Comida","Cena"}));
+		contentPane.add(jcbCtegorias);
 		
-		JRadioButton radioButton_1 = new JRadioButton("Cena");
-		radioButton_1.setBackground(new Color(255, 165, 0));
-		radioButton_1.setBounds(328, 205, 87, 23);
-		contentPane.add(radioButton_1);
+		JLabel label = new JLabel("Nacionalidad:");
+		label.setFont(new Font("Cambria Math", Font.BOLD, 15));
+		label.setBounds(49, 252, 102, 18);
+		contentPane.add(label);
 		
-		JRadioButton radioButton_2 = new JRadioButton("Desayuno");
-		radioButton_2.setBackground(new Color(255, 165, 0));
-		radioButton_2.setBounds(150, 205, 91, 23);
-		contentPane.add(radioButton_2);
+		txtNacionalidad = new JTextField();
+		txtNacionalidad.setColumns(10);
+		txtNacionalidad.setBounds(164, 250, 204, 22);
+		contentPane.add(txtNacionalidad);
 		
+		PlatillosActualizaEliminaController x = new PlatillosActualizaEliminaController(this);
 		
-		btnActualizar.addActionListener(new PlatillosActualizaEliminaController(this));
-		btnAnterior.addActionListener(new PlatillosActualizaEliminaController(this));
-		btnEliminar.addActionListener(new PlatillosActualizaEliminaController(this));
-		btnSiguiente.addActionListener(new PlatillosActualizaEliminaController(this));
-		btnVentanaAtras.addActionListener(new PlatillosActualizaEliminaController(this));
+		btnActualizar.addActionListener(x);
+		btnAnterior.addActionListener(x);
+		btnEliminar.addActionListener(x);
+		btnSiguiente.addActionListener(x);
+		btnVentanaAtras.addActionListener(x);
+	}
+
+	public int getJcbCategorias() {
+		return jcbCtegorias.getSelectedIndex();
+	}
+	
+	public String getSelectedItem() {
+		return (String) jcbCtegorias.getSelectedItem();
+	} 
+	public void setTxtNombre(String txtNombre) {
+		this.txtNombre.setText(txtNombre);
+	}
+
+	public void setTxtCosto(String txtCosto) {
+		this.txtCosto.setText(txtCosto);
+	}
+
+	public void setTxtDescripcion(String txtDescripcion) {
+		this.txtDescripcion.setText(txtDescripcion);
+	}
+	
+
+	public void setTxtNacionalidad(String txtNacionalidad) {
+		this.txtNacionalidad.setText(txtNacionalidad);
+	}
+
+	
+	public void setJcbCtegorias(String jcbCtegorias) {
+		this.jcbCtegorias.setSelectedItem(jcbCtegorias);
 	}
 
 	/**
 	 * @return the btnAnterior
 	 */
-	public Object getBtnAnterior() {
+	public JButton getBtnAnterior() {
 		return btnAnterior;
 	}
 
 	/**
 	 * @return the btnSiguiente
 	 */
-	public Object getBtnSiguiente() {
+	public JButton getBtnSiguiente() {
 		return btnSiguiente;
 	}
 
 	/**
 	 * @return the btnActualizar
 	 */
-	public Object getBtnActualizar() {
+	public JButton getBtnActualizar() {
 		return btnActualizar;
 	}
 
 	/**
 	 * @return the btnEliminar
 	 */
-	public Object getBtnEliminar() {
+	public JButton getBtnEliminar() {
 		return btnEliminar;
 	}
 
 	/**
 	 * @return the btnVentanaAtras
 	 */
-	public Object getBtnVentanaAtras() {
+	public JButton getBtnVentanaAtras() {
 		return btnVentanaAtras;
 	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public JTextField getTxtCosto() {
+		return txtCosto;
+	}
+
+	public JTextArea getTxtDescripcion() {
+		return txtDescripcion;
+	}
+
+	public JTextField getTxtNacionalidad() {
+		return txtNacionalidad;
+	}
+
+	public JComboBox<String> getJcbCtegorias() {
+		return jcbCtegorias;
+	}
+
+	public String getNombre() {
+		return txtNombre.getText();
+	}
+
+	public String getCosto() {
+		return txtCosto.getText();
+	}
+
+	public String getDescripcion() {
+		return txtDescripcion.getText();
+	}
+
+	public String getNacionalidad() {
+		return txtNacionalidad.getText();
+	}
+
+	public String getSelectedItem2() {
+		return (String) jcbCtegorias.getSelectedItem();
+	} 
+	
+
+	
 }
