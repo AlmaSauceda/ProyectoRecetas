@@ -112,15 +112,17 @@ public class RecetasControlador implements ActionListener {
 	private void consultarDetalle() {
 		if (listaDetRece.size() > 0) {
 			recGes.setTable(crudRec.eliminarValoresTabla(recGes.getTable()));
-			int numCols = recGes.getTable().getModel().getColumnCount();
-			Object[] fila = new Object[numCols];
-			fila[0] = listaDetRece.get(indiceDet).getId_ingrediente();
-			fila[1] = listaDetRece.get(indiceDet).getCantidad();
-			fila[2] = listaDetRece.get(indiceDet).getPorcion();
-			fila[3] = listaDetRece.get(indiceDet).getImplementacion();
 
-			((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
-
+				for (int i = 0; i < listaDetRece.size(); i++) {
+					int numCols = recGes.getTable().getModel().getColumnCount();
+					Object[] fila = new Object[numCols];
+					fila[0] = listaDetRece.get(indiceDet).getId_ingrediente();
+					fila[1] = listaDetRece.get(indiceDet).getCantidad();
+					fila[2] = listaDetRece.get(indiceDet).getPorcion();
+					fila[3] = listaDetRece.get(indiceDet).getImplementacion();
+					((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
+				}
+			
 			recGes.setTable(recGes.getTable());
 		}
 	}

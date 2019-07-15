@@ -10,7 +10,7 @@ import modelo.Platillos;
 import modelo.Receta;
 
 public class DaoReceta {
-	
+
 	public void registrarPlatillos(Platillos platillos) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
@@ -50,7 +50,7 @@ public class DaoReceta {
 	public ArrayList<DetalleReceta> consultarDetalleReceta() throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql
-				.getStatement("SELECT * FROM receta.detalle_receta order by id_receta");
+				.getStatement("SELECT * FROM receta.detalle_receta order by id_detalle");
 		ResultSet resultSet = preparedStatement.executeQuery();
 		ArrayList<DetalleReceta> listaIng = new ArrayList<DetalleReceta>();
 		while (resultSet.next()) {
