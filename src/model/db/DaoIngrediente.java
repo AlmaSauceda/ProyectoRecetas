@@ -83,7 +83,7 @@ public class DaoIngrediente {
 	public void eliminarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException{
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
-				"DELETE FROM receta.ingredientes CASCADE WHERE id_ingrediente=?");
+				"DELETE FROM receta.ingredientes WHERE id_ingrediente=?");
 
 		preparedStatement.setInt(1, ingrediente.getId_ingrediente());
 
