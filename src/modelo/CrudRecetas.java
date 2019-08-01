@@ -153,21 +153,21 @@ public class CrudRecetas {
 	public JTable registrarDetReceta(JTable table) {
 
 		if (table.getRowCount() > 0) {
-			for (int i = 0; i < table.getRowCount(); i++) {
+			System.out.println("numero de filas: " + table.getRowCount());
+			for (int i = 0; i < table.getRowCount();) {
+				System.out.println(i);
 				try {
 					String consulta = "INSERT INTO detalle_receta(cantidad , porcion ,implementacion, id_ingrediente , id_receta) VALUES(?,?,?,?,?)";
 					conexion = ConectionPostgresql.getInstance();
 					PreparedStatement ps = conexion.getStatement(consulta);
 					ps.setInt(1, Integer.parseInt(table.getValueAt(i, 1).toString()));
-
 					ps.setString(2, table.getValueAt(i, 2).toString());
 					ps.setString(3, table.getValueAt(i, 3).toString());
 					ps.setInt(4, recuperarIdIngrediente(table.getValueAt(i, 0).toString()));
 					ps.setInt(5, recuperarIdReceta());
 					ps.executeUpdate();
 					ps.close();
-
-					return eliminarValoresTabla(table);
+					i++;
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -179,7 +179,8 @@ public class CrudRecetas {
 				}
 
 			}
-		}else {
+			return eliminarValoresTabla(table);
+		} else {
 			Messages.showError("Ingrese los ingredientes de la receta");
 		}
 		return eliminarValoresTabla(table);

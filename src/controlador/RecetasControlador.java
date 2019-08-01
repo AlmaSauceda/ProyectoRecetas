@@ -82,7 +82,6 @@ public class RecetasControlador implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Este es el primer registro");
 				}
 				consultar();
-
 				consultarDetalle();
 			} else if (source == recGes.getBtnEliminar()) {
 				System.out.println("Aqui va Eliminar");
@@ -110,16 +109,26 @@ public class RecetasControlador implements ActionListener {
 	}
 
 	private void consultarDetalle() {
+		try {
+			//System.out.println(listaRece.get(indice).getId_platillo());
+			listaDetRece = modelRece.consultarDetalleReceta(listaRece.get(indice).getId_receta());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (listaDetRece.size() > 0) {
 			recGes.setTable(crudRec.eliminarValoresTabla(recGes.getTable()));
 
 				for (int i = 0; i < listaDetRece.size(); i++) {
 					int numCols = recGes.getTable().getModel().getColumnCount();
 					Object[] fila = new Object[numCols];
-					fila[0] = listaDetRece.get(indiceDet).getId_ingrediente();
-					fila[1] = listaDetRece.get(indiceDet).getCantidad();
-					fila[2] = listaDetRece.get(indiceDet).getPorcion();
-					fila[3] = listaDetRece.get(indiceDet).getImplementacion();
+					fila[0] = listaDetRece.get(i).getNombre();
+					fila[1] = listaDetRece.get(i).getCantidad();
+					fila[2] = listaDetRece.get(i).getPorcion();
+					fila[3] = listaDetRece.get(i).getImplementacion();
 					((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
 				}
 			
@@ -145,7 +154,7 @@ public class RecetasControlador implements ActionListener {
 		try {
 			indice = 0;
 			listaRece = modelRece.consultarReceta();
-			listaDetRece = modelRece.consultarDetalleReceta();
+		//	listaDetRece = modelRece.consultarDetalleReceta(listaRece.get(indice).getId_platillo());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

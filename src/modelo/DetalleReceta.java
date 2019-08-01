@@ -15,6 +15,7 @@ public class DetalleReceta {
 	private int cantidad;
 	private String porcion;
 	private String implementacion;
+	private String nombre;
 	
 	//getter y setters
 	public int getId_detalle() {
@@ -53,6 +54,20 @@ public class DetalleReceta {
 	public void setImplementacion(String implementacion) {
 		this.implementacion = implementacion;
 	}
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
 	
 	//getter y setters
 	

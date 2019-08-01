@@ -17,9 +17,9 @@ public class ModelReceta {
 		return dao.consultarRecetas();
 	}
 
-	public ArrayList<DetalleReceta> consultarDetalleReceta() throws ClassNotFoundException, SQLException {
+	public ArrayList<DetalleReceta> consultarDetalleReceta(int id) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		return dao.consultarDetalleReceta();
+		return dao.consultarDetalleReceta(id);
 	}
 
 }

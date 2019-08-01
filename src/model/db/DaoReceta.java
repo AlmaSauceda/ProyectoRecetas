@@ -47,10 +47,12 @@ public class DaoReceta {
 		return listaIng;
 	}
 
-	public ArrayList<DetalleReceta> consultarDetalleReceta() throws SQLException, ClassNotFoundException {
+	public ArrayList<DetalleReceta> consultarDetalleReceta(int id) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql
-				.getStatement("SELECT * FROM receta.detalle_receta order by id_detalle");
+				.getStatement("SELECT id_detalle, i.nombre, cantidad, porcion, dr.id_receta, dr.id_ingrediente, implementacion  FROM receta.detalle_receta dr\r\n"
+						+ "inner join receta.ingredientes i on i.id_ingrediente = dr.id_ingrediente where id_receta=?");
+		preparedStatement.setInt(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		ArrayList<DetalleReceta> listaIng = new ArrayList<DetalleReceta>();
 		while (resultSet.next()) {
@@ -61,6 +63,7 @@ public class DaoReceta {
 			ing.setImplementacion(resultSet.getString("implementacion"));
 			ing.setId_ingrediente(resultSet.getInt("id_ingrediente"));
 			ing.setId_receta(resultSet.getInt("id_receta"));
+			ing.setNombre(resultSet.getString("nombre"));
 			listaIng.add(ing);
 		}
 		preparedStatement.close();
