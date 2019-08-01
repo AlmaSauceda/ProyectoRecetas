@@ -5,10 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
+import javax.sql.DataSource;
+import org.apache.commons.dbcp.BasicDataSource;
 /***
  * Develop by joseline
  * 
- * Clase que contiene conexion a base de datos
+ * Clase que contiene conexion a base de datos usando un pool de conexiones
  * 
  * **/
 
@@ -27,19 +30,34 @@ public class ConectionPostgresql {
 
 	private static final String _USER = "proyectBE";
 	private static final String _PASSWORD = "proyectBE@@";
+	
+	/**
+	 * Variables para el pool de conexiones
+	 */
 
 	private ConectionPostgresql() {}
 
 	public static ConectionPostgresql getInstance() throws ClassNotFoundException, SQLException {
+		
+		BasicDataSource basicDataSource=  new BasicDataSource();
+		DataSource dataSource;
+		
 		String url = "";
 		if (instance == null) {
 			instance = new ConectionPostgresql();
 			System.out.println("Good instance");
 		}
 		if (connection == null) {
-			Class.forName(_DRIVER);
+		//	Class.forName(_DRIVER);
 			url = _JDBC + _HOST + "/" + _DB_NAME;
-			connection = DriverManager.getConnection(url, _USER, _PASSWORD);
+		//	connection = DriverManager.getConnection(url, _USER, _PASSWORD);
+			basicDataSource.setDriverClassName(_DRIVER);
+			basicDataSource.setUsername(_USER);
+			basicDataSource.setPassword(_PASSWORD);
+			basicDataSource.setUrl(url);
+			basicDataSource.setMaxActive(5);
+			dataSource = basicDataSource;
+			connection = dataSource.getConnection();
 			System.out.println("Good connection");
 		}
 		return instance;

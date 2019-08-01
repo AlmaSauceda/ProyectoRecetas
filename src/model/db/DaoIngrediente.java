@@ -10,11 +10,9 @@ import modelo.Platillos;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;  
-
+import java.util.ArrayList;
 
 public class DaoIngrediente {
-
 
 	public void registrarIngredientes(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
@@ -31,40 +29,39 @@ public class DaoIngrediente {
 		preparedStatement.close();
 
 	}
-	
-	//pendiente
+
+	// pendiente
 	public ArrayList<Ingredientes> consultarIngredientes() throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
-		
-		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
-				"SELECT * FROM receta.ingredientes order by id_ingrediente");
-				
+
+		PreparedStatement preparedStatement = connectionPostgresql
+				.getStatement("SELECT * FROM receta.ingredientes order by id_ingrediente");
+
 		ResultSet resultSet = preparedStatement.executeQuery();
-		
+
 		ArrayList<Ingredientes> listaIng = new ArrayList<Ingredientes>();
-		
-	    while (resultSet.next()) {
-			
-	    	Ingredientes ing = new Ingredientes();
-			
+
+		while (resultSet.next()) {
+
+			Ingredientes ing = new Ingredientes();
+
 			ing.setId_ingrediente(resultSet.getInt("id_ingrediente"));
 			ing.setNombre(resultSet.getString("nombre"));
 			ing.setTipo(resultSet.getString("tipo"));
-			ing.setMarca(resultSet.getString("marca"));			
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");			
-			ing.setCaducidad( dateFormat.format(resultSet.getDate("caducidad")));
-						
+			ing.setMarca(resultSet.getString("marca"));
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			ing.setCaducidad(dateFormat.format(resultSet.getDate("caducidad")));
+
 			ing.setCosto(resultSet.getDouble("costo"));
-			
-            System.out.println(ing);
-            listaIng.add(ing);
-        }		
-		preparedStatement.close();		
+
+			listaIng.add(ing);
+		}
+		preparedStatement.close();
 		return listaIng;
 	}
-	
-	public void actualizarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException{
-		
+
+	public void actualizarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
+
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
 				"UPDATE receta.ingredientes SET nombre=?, tipo=?, marca=?, caducidad=?, costo=? WHERE id_ingrediente=?");
@@ -79,11 +76,11 @@ public class DaoIngrediente {
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 	}
-	
-	public void eliminarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException{
+
+	public void eliminarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
-		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
-				"DELETE FROM receta.ingredientes WHERE id_ingrediente=?");
+		PreparedStatement preparedStatement = connectionPostgresql
+				.getStatement("DELETE FROM receta.ingredientes WHERE id_ingrediente=?");
 
 		preparedStatement.setInt(1, ingrediente.getId_ingrediente());
 
