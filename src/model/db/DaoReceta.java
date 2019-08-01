@@ -49,8 +49,8 @@ public class DaoReceta {
 
 	public ArrayList<DetalleReceta> consultarDetalleReceta(int id) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
-		PreparedStatement preparedStatement = connectionPostgresql
-				.getStatement("SELECT id_detalle, i.nombre, cantidad, porcion, dr.id_receta, dr.id_ingrediente, implementacion  FROM receta.detalle_receta dr\r\n"
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
+				"SELECT id_detalle, i.nombre, cantidad, porcion, dr.id_receta, dr.id_ingrediente, implementacion  FROM receta.detalle_receta dr\r\n"
 						+ "inner join receta.ingredientes i on i.id_ingrediente = dr.id_ingrediente where id_receta=?");
 		preparedStatement.setInt(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -68,5 +68,26 @@ public class DaoReceta {
 		}
 		preparedStatement.close();
 		return listaIng;
+	}
+
+	public void eliminarReceta(int id_receta) throws SQLException, ClassNotFoundException {
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+		PreparedStatement preparedStatement = connectionPostgresql
+				.getStatement("DELETE FROM receta.detalle_receta WHERE id_receta=?");
+
+		preparedStatement.setInt(1, id_receta);
+
+		preparedStatement.executeUpdate();
+		
+		preparedStatement = connectionPostgresql
+				.getStatement("DELETE FROM receta.recetas WHERE id_receta=?");
+
+		preparedStatement.setInt(1, id_receta);
+
+		preparedStatement.executeUpdate();
+		
+		
+		preparedStatement.close();
+
 	}
 }

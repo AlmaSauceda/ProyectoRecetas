@@ -22,4 +22,9 @@ public class ModelReceta {
 		return dao.consultarDetalleReceta(id);
 	}
 
+	public void eliminarReceta(int id_receta) throws ClassNotFoundException, SQLException{
+		dao.eliminarReceta(id_receta);
+		
+	}
+
 }

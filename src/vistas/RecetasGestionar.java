@@ -26,29 +26,29 @@ public class RecetasGestionar extends JFrame {
 	private RecetasControlador controller;
 	private JPanel contentPane;
 	private JLabel lblRegistrarIngredientes;
-	private JButton btnAnterior;
-	private JButton btnSiguiente;
-	private JButton btnActualizar;
-	private JButton btnEliminar;
-	private JButton btnAtrasVentana;
-	private JComboBox cmbPlatillo;
+	public JButton btnAnterior;
+	public JButton btnSiguiente;
+	public JButton btnActualizar;
+	public JButton btnEliminar;
+	public JButton btnAtrasVentana;
+	public JComboBox cmbPlatillo;
 	private JLabel label;
 	private JLabel label_1;
-	private JTextField txtTitulo;
+	public JTextField txtTitulo;
 	private JLabel label_2;
 	private JTextArea txtProcedimiento;
 	private JLabel label_3;
-	private JTextField txtTerminologia;
+	public JTextField txtTerminologia;
 	private JLabel label_4;
-	private JSpinner txtComenzales;
+	public JSpinner txtComenzales;
 	private JLabel label_5;
-	private JTextField txtImplementacion;
-	private JTextField txtPorcion;
+	public JTextField txtImplementacion;
+	public JTextField txtPorcion;
 	private JLabel label_6;
 	private JLabel label_7;
-	private JSpinner txtCantidad;
+	public JSpinner txtCantidad;
 	private JLabel label_8;
-	private JComboBox cmbIngrediente;
+	public JComboBox cmbIngrediente;
 	private JScrollPane scrollPane;
 	private JButton btnAgregar;
 	private JTable table;
@@ -375,7 +375,7 @@ public class RecetasGestionar extends JFrame {
 	public void setMandarCmbPlatillo(String cmbPlatillo) {
 		this.cmbPlatillo.setSelectedItem(cmbPlatillo);
 	}
-	
+
 	/**
 	 * @return the cmbPlatillo en cadena
 	 */
@@ -404,6 +404,7 @@ public class RecetasGestionar extends JFrame {
 		return cmbIngrediente.getSelectedItem().toString();
 	}
 
+	
 	/**
 	 * @return the txtCantidad
 	 */

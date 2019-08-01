@@ -39,7 +39,6 @@ public class RecetasControlador implements ActionListener {
 		this.recGes = recGes;
 		modelRece = new ModelReceta();
 		cargarIngredientes();
-
 	}
 
 	public RecetasControlador(RecetasRegistrar recReg) {
@@ -85,6 +84,16 @@ public class RecetasControlador implements ActionListener {
 				consultarDetalle();
 			} else if (source == recGes.getBtnEliminar()) {
 				System.out.println("Aqui va Eliminar");
+
+				if (recGes.getBtnEliminar().equals("Cancelar")) {
+					deshabilitarCampos();
+					cargarIngredientes();
+				} else {
+					eliminar();
+					cargarIngredientes();
+				}
+				consultar();
+
 			} else if (source == recGes.getBtnSiguiente()) {
 
 				if (indice + 1 < listaRece.size()) {
@@ -110,7 +119,7 @@ public class RecetasControlador implements ActionListener {
 
 	private void consultarDetalle() {
 		try {
-			//System.out.println(listaRece.get(indice).getId_platillo());
+			// System.out.println(listaRece.get(indice).getId_platillo());
 			listaDetRece = modelRece.consultarDetalleReceta(listaRece.get(indice).getId_receta());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -122,16 +131,16 @@ public class RecetasControlador implements ActionListener {
 		if (listaDetRece.size() > 0) {
 			recGes.setTable(crudRec.eliminarValoresTabla(recGes.getTable()));
 
-				for (int i = 0; i < listaDetRece.size(); i++) {
-					int numCols = recGes.getTable().getModel().getColumnCount();
-					Object[] fila = new Object[numCols];
-					fila[0] = listaDetRece.get(i).getNombre();
-					fila[1] = listaDetRece.get(i).getCantidad();
-					fila[2] = listaDetRece.get(i).getPorcion();
-					fila[3] = listaDetRece.get(i).getImplementacion();
-					((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
-				}
-			
+			for (int i = 0; i < listaDetRece.size(); i++) {
+				int numCols = recGes.getTable().getModel().getColumnCount();
+				Object[] fila = new Object[numCols];
+				fila[0] = listaDetRece.get(i).getNombre();
+				fila[1] = listaDetRece.get(i).getCantidad();
+				fila[2] = listaDetRece.get(i).getPorcion();
+				fila[3] = listaDetRece.get(i).getImplementacion();
+				((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
+			}
+
 			recGes.setTable(recGes.getTable());
 		}
 	}
@@ -154,7 +163,8 @@ public class RecetasControlador implements ActionListener {
 		try {
 			indice = 0;
 			listaRece = modelRece.consultarReceta();
-		//	listaDetRece = modelRece.consultarDetalleReceta(listaRece.get(indice).getId_platillo());
+			// listaDetRece =
+			// modelRece.consultarDetalleReceta(listaRece.get(indice).getId_platillo());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -232,4 +242,38 @@ public class RecetasControlador implements ActionListener {
 		recReg.setTxtComenzales(0);
 		recReg.setTxtCantidad(0);
 	}
+
+	/**
+	 * Metodo para deshabilitar los campos de la vista
+	 */
+	private void deshabilitarCampos() {
+		recGes.txtCantidad.setEnabled(false);
+		recGes.txtComenzales.setEnabled(false);
+		recGes.txtImplementacion.setEditable(false);
+		recGes.txtPorcion.setEditable(false);
+		recGes.txtTerminologia.setEditable(false);
+		recGes.txtTitulo.setEditable(false);
+		recGes.btnActualizar.setText("ACTUALIZAR");
+		recGes.btnEliminar.setText("ELIMINAR");
+	}
+
+	/**
+	 * Metodo para eliminar
+	 */
+
+	public void eliminar() {
+		try {
+			modelRece.eliminarReceta(listaRece.get(indice).getId_receta());
+			;
+			Messages.showMessage("\nSe eliminó correctamente");
+		} catch (ClassNotFoundException e) {
+			Messages.showError("\nNo se eliminó\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Messages.showError("\nNo se eliminó\n" + e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
