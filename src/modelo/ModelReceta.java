@@ -2,6 +2,10 @@ package modelo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+
 import model.db.DaoReceta;
 
 public class ModelReceta {
@@ -27,9 +31,42 @@ public class ModelReceta {
 		
 	}
 
-	public void actualizarIngrediente(Receta receta) throws ClassNotFoundException, SQLException{
-		dao.actualizarIngrediente(receta);
+	public void actualizarReceta(Receta receta) throws ClassNotFoundException, SQLException{
+		dao.actualizarReceta(receta);
 		
+	}
+
+	public void registrarReceta(Receta receta) throws ClassNotFoundException, SQLException{
+		dao.registrarReceta(receta);
+		
+	}
+
+	public int consultarID(String cmbPlatilloS) throws ClassNotFoundException, SQLException{
+		return dao.consultarID(cmbPlatilloS);
+	}
+
+	public JTable registrarDetReceta(JTable table) throws ClassNotFoundException, SQLException{
+		return dao.registrarDetReceta(table);
+	}
+
+	public JTable eliminarValoresTabla(JTable table) {
+		return dao.eliminarValoresTabla(table);
+	}
+
+	public JComboBox cargarCombo(JComboBox cmbIngrediente, String string) throws ClassNotFoundException, SQLException{
+		return dao.cargarCombo(cmbIngrediente, string);
+	}
+
+	public String recuperarNombre(int id_platillo) throws ClassNotFoundException, SQLException{
+		return dao.recuperarNombre(id_platillo);
+	}
+
+	public int recuperarIdIngrediente(String cmbIngredienteS) throws ClassNotFoundException, SQLException{
+		return dao.recuperarIdIngrediente(cmbIngredienteS);
+	}
+
+	public JTable InsertarFilas(JTable table, DetalleReceta crearDetalle)  throws ClassNotFoundException, SQLException{
+		return dao.InsertarFilas(table, crearDetalle);
 	}
 
 }

@@ -408,8 +408,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @return the txtCantidad
 	 */
-	public String getTxtCantidad() {
-		return txtCantidad.getValue().toString();
+	public int getTxtCantidad() {
+		return (int) txtCantidad.getValue();
 	}
 
 	/**

@@ -389,8 +389,8 @@ public class RecetasRegistrar extends JFrame {
 	/**
 	 * @return the txtCantidad
 	 */
-	public String getTxtCantidad() {
-		return txtCantidad.getValue().toString();
+	public int getTxtCantidad() {
+		return (int) txtCantidad.getValue();
 	}
 
 	/**
@@ -403,8 +403,8 @@ public class RecetasRegistrar extends JFrame {
 	/**
 	 * @return the txtComenzales
 	 */
-	public String getTxtComenzales() {
-		return txtComenzales.getValue().toString();
+	public int getTxtComenzales() {
+		return (int) txtComenzales.getValue();
 	}
 
 	/**

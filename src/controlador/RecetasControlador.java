@@ -13,10 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-import modelo.CrudRecetas;
 import modelo.DetalleReceta;
-import modelo.Ingredientes;
 import modelo.ModelReceta;
 import modelo.Receta;
 import View.Dialogs.*;
@@ -28,7 +25,6 @@ public class RecetasControlador implements ActionListener {
 
 	private RecetasGestionar recGes;
 	private RecetasRegistrar recReg;
-	private CrudRecetas crudRec = new CrudRecetas();
 	private ArrayList<Receta> listaRece = new ArrayList<Receta>();
 	private ArrayList<DetalleReceta> listaDetRece = new ArrayList<DetalleReceta>();
 	private int indice = 0;
@@ -64,8 +60,12 @@ public class RecetasControlador implements ActionListener {
 			} else if (source == recReg.getBtnAtrasVentana()) {
 				CrearVentanaAtrasReg();
 			} else if (source == recReg.getBtnAgregar()) {
-				recReg.setTable(crudRec.InsertarFilas(recReg.getTable(), recReg.getCmbIngredienteS(),
-						recReg.getTxtCantidad(), recReg.getTxtPorcion(), recReg.getTxtImplementacion()));
+				try {
+					recReg.setTable(modelRece.InsertarFilas(recReg.getTable(), crearDetalle()));
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
 			if (source == recGes.getBtnActualizar()) {
@@ -120,15 +120,18 @@ public class RecetasControlador implements ActionListener {
 			} else if (source == recGes.getBtnAtrasVentana()) {
 				CrearVentanaAtras();
 			} else if (source == recReg.getBtnAgregar()) {
-				recGes.setTable(crudRec.InsertarFilas(recGes.getTable(), recGes.getCmbIngredienteS(),
-						recGes.getTxtCantidad(), recGes.getTxtPorcion(), recGes.getTxtImplementacion()));
+				try {
+					recGes.setTable(modelRece.InsertarFilas(recGes.getTable(), crearDetalle()));
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
 	private void consultarDetalle() {
 		try {
-			// System.out.println(listaRece.get(indice).getId_platillo());
 			listaDetRece = modelRece.consultarDetalleReceta(listaRece.get(indice).getId_receta());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -138,7 +141,7 @@ public class RecetasControlador implements ActionListener {
 			e.printStackTrace();
 		}
 		if (listaDetRece.size() > 0) {
-			recGes.setTable(crudRec.eliminarValoresTabla(recGes.getTable()));
+			recGes.setTable(modelRece.eliminarValoresTabla(recGes.getTable()));
 
 			for (int i = 0; i < listaDetRece.size(); i++) {
 				int numCols = recGes.getTable().getModel().getColumnCount();
@@ -156,7 +159,12 @@ public class RecetasControlador implements ActionListener {
 
 	private void consultar() {
 		if (listaRece.size() > 0) {
-			recGes.setMandarCmbPlatillo(crudRec.recuperarNombre(listaRece.get(indice).getId_platillo()));
+			try {
+				recGes.setMandarCmbPlatillo(modelRece.recuperarNombre(listaRece.get(indice).getId_platillo()));
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			recGes.setTxtTitulo(listaRece.get(indice).getTitulo());
 			recGes.setTxtProcedimiento(listaRece.get(indice).getProcedimiento());
 			recGes.setTxtTerminologia(listaRece.get(indice).getTerminologia());
@@ -187,9 +195,24 @@ public class RecetasControlador implements ActionListener {
 	 * para realizar la consulta
 	 */
 	private void registrarReceta() {
-		crudRec.RegistrarReceta(recReg.getCmbPlatilloS(), recReg.getTxtTitulo(), recReg.getTxtProcedimiento(),
-				recReg.getTxtTerminologia(), recReg.getTxtComenzales());
-		recReg.setTable(crudRec.registrarDetReceta(recReg.getTable()));
+		Receta receta = new Receta();
+		receta.setTitulo(recReg.getTxtTitulo());
+		receta.setProcedimiento(recReg.getTxtProcedimiento());
+		receta.setTerminologia(recReg.getTxtTerminologia());
+		receta.setComensales(recReg.getTxtComenzales());
+		try {
+			receta.setId_platillo(modelRece.consultarID(recReg.getCmbPlatilloS()));
+			modelRece.registrarReceta(receta);
+			recReg.setTable(modelRece.registrarDetReceta(recReg.getTable()));
+			Messages.showMessage("\nSe agrego de forma correcta");
+		} catch (ClassNotFoundException e) {
+			Messages.showError("\nNo se registro\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Messages.showError("\nNo se registro\n" + e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		borrarDatos();
 		Messages.showMessage("Registro de receta");
 	}
@@ -199,8 +222,14 @@ public class RecetasControlador implements ActionListener {
 	 * para realizar el llenado de los combos
 	 */
 	public void CargarCombosGes() {
-		recGes.setCmbIngrediente(crudRec.cargarCombo(recGes.getCmbIngrediente(), "ingredientes"));
-		recGes.setCmbPlatillo(crudRec.cargarCombo(recGes.getCmbPlatillo(), "platillos"));
+		try {
+			recGes.setCmbIngrediente(modelRece.cargarCombo(recGes.getCmbIngrediente(), "ingredientes"));
+			recGes.setCmbPlatillo(modelRece.cargarCombo(recGes.getCmbPlatillo(), "platillos"));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -209,8 +238,13 @@ public class RecetasControlador implements ActionListener {
 	 */
 
 	public void CargarCombosReg() {
-		recReg.setCmbPlatillo(crudRec.cargarCombo(recReg.getCmbPlatillo(), "platillos"));
-		recReg.setCmbIngrediente(crudRec.cargarCombo(recReg.getCmbIngrediente(), "ingredientes"));
+		try {
+			recReg.setCmbPlatillo(modelRece.cargarCombo(recReg.getCmbPlatillo(), "platillos"));
+			recReg.setCmbIngrediente(modelRece.cargarCombo(recReg.getCmbIngrediente(), "ingredientes"));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -303,6 +337,21 @@ public class RecetasControlador implements ActionListener {
 	/**
 	 * Metodo para Actualizar la receta
 	 */
+	public DetalleReceta crearDetalle() {
+		DetalleReceta dt = new DetalleReceta();
+		
+		dt.setCantidad(recReg.getTxtCantidad());
+		dt.setPorcion(recReg.getTxtPorcion());
+		dt.setImplementacion(recReg.getTxtImplementacion());
+		try {
+			dt.setId_ingrediente(modelRece.recuperarIdIngrediente(recReg.getCmbIngredienteS()));
+			return dt;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dt;
+	}
 
 	private void actualizar() {
 		Receta receta = new Receta();
@@ -310,10 +359,10 @@ public class RecetasControlador implements ActionListener {
 		receta.setProcedimiento(recGes.getTxtProcedimiento());
 		receta.setTerminologia(recGes.getTxtTerminologia());
 		receta.setComensales(recGes.getTxtComenzales());
-		receta.setId_platillo(crudRec.consultarID(recGes.getCmbPlatilloS()));
 		receta.setId_receta(listaRece.get(indice).getId_receta());
 		try {
-			modelRece.actualizarIngrediente(receta);
+			receta.setId_platillo(modelRece.consultarID(recGes.getCmbPlatilloS()));
+			modelRece.actualizarReceta(receta);
 			Messages.showMessage("\nSe actualizó correctamente");
 		} catch (ClassNotFoundException e) {
 			Messages.showError("\nNo se actualizó\n" + e.getMessage());

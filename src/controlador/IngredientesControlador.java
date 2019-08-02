@@ -24,11 +24,11 @@ public class IngredientesControlador implements ActionListener {
 	private Ingredientes ingredientes;
 	private ArrayList<Ingredientes> listaIng = new ArrayList<Ingredientes>();
 	private int indice = 0;
-	
+
 	public IngredientesControlador(IngredientesRegistrar ingreReg) {
 		viewIngrediente = ingreReg;
 		modelIngr = new ModelIngredientes();
-		ingredientes = new Ingredientes();		
+		ingredientes = new Ingredientes();
 	}
 
 	public IngredientesControlador(IngredientesGestionar ingreGes) {
@@ -42,48 +42,48 @@ public class IngredientesControlador implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 		Object source = evt.getSource();
 		crudIng = new CrudIngredientes();
-		
+
 		if (ingreGes != null) {
-			
+
 			if (source == ingreGes.getBtnActualizar()) {
-				
-				if(ingreGes.btnActualizar.getText().equals("ACTUALIZAR")){
+
+				if (ingreGes.btnActualizar.getText().equals("ACTUALIZAR")) {
 					habilitarCampos();
-				}else{
+				} else {
 					actualizar();
 					deshabilitarCampos();
 					cargarIngredientes();
 					consultar();
 				}
-				
+
 			} else if (source == ingreGes.getBtnAnterior()) {
-				
-				if(indice > 0){
-					indice--;					
-				} else{
+
+				if (indice > 0) {
+					indice--;
+				} else {
 					JOptionPane.showMessageDialog(null, "Este es el primer registro");
 				}
 				consultar();
-				
+
 			} else if (source == ingreGes.getBtnEliminar()) {
-				
-				if(ingreGes.btnEliminar.getText().equals("Cancelar")){
+
+				if (ingreGes.btnEliminar.getText().equals("Cancelar")) {
 					deshabilitarCampos();
 					cargarIngredientes();
-				}else{
+				} else {
 					eliminar();
-					cargarIngredientes();					
+					cargarIngredientes();
 				}
 				consultar();
 			} else if (source == ingreGes.getBtnSiguiente()) {
 
-				if(indice + 1 < listaIng.size()){
-					indice++;					
-				} else{
+				if (indice + 1 < listaIng.size()) {
+					indice++;
+				} else {
 					JOptionPane.showMessageDialog(null, "Este es el último registro");
 				}
 				consultar();
-				
+
 			} else if (source == ingreGes.getBtnAtrasVentana()) {
 				crudIng.RegresarVentana(ingreGes);
 			}
@@ -91,7 +91,6 @@ public class IngredientesControlador implements ActionListener {
 			if (source == viewIngrediente.getBtnAtrasVentana()) {
 				crudIng.RegresarVentana(viewIngrediente);
 			} else if (source == viewIngrediente.getBtnRegistrar()) {
-				System.out.println("Entro a controlador");
 				registrar();
 				limpiar();
 			}
@@ -104,9 +103,6 @@ public class IngredientesControlador implements ActionListener {
 		ingredientes.setMarca(viewIngrediente.getTxtMarca());
 		ingredientes.setCaducidad(viewIngrediente.getTxtCaducidad());
 		ingredientes.setCosto(Double.parseDouble(viewIngrediente.getTxt_Costo()));
-
-		System.out.println("" + ingredientes.getNombre() + ingredientes.getTipo() + ingredientes.getMarca()
-				+ ingredientes.getCaducidad() + ingredientes.getCosto());
 
 		try {
 			modelIngr.registrarIngrediente(ingredientes);
@@ -122,17 +118,16 @@ public class IngredientesControlador implements ActionListener {
 
 	}
 
+	public void consultar() {
 
-	public void consultar(){	
-		
-		if(listaIng.size() > 0){
+		if (listaIng.size() > 0) {
 			ingreGes.setTxtNombre(listaIng.get(indice).getNombre());
 			ingreGes.setCmbTipoIn(listaIng.get(indice).getTipo());
 			ingreGes.setTxtMarca(listaIng.get(indice).getMarca());
 			ingreGes.setTxtCaducidad(listaIng.get(indice).getCaducidad());
 			ingreGes.setTxt_Costo(String.valueOf(listaIng.get(indice).getCosto()));
-			ingredientes=listaIng.get(indice);
-		}else{
+			ingredientes = listaIng.get(indice);
+		} else {
 			JOptionPane.showMessageDialog(null, "No hay registros para mostrar");
 			ingreGes.btnActualizar.setEnabled(false);
 			ingreGes.btnAnterior.setEnabled(false);
@@ -143,10 +138,10 @@ public class IngredientesControlador implements ActionListener {
 			ingreGes.setTxtMarca("");
 			ingreGes.setTxtCaducidad("");
 			ingreGes.setTxt_Costo("");
-		}		
+		}
 	}
 
-	public void cargarIngredientes(){
+	public void cargarIngredientes() {
 		listaIng = new ArrayList<Ingredientes>();
 		try {
 			indice = 0;
@@ -155,20 +150,21 @@ public class IngredientesControlador implements ActionListener {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}			
+		}
 	}
-	
-	public void limpiar(){
+
+	public void limpiar() {
 		viewIngrediente.setTxtNombre("");
 		viewIngrediente.setCmbIngrediente("-Seleccione-");
 		viewIngrediente.setTxtMarca("");
 		viewIngrediente.setTxtCaducidad("");
 		viewIngrediente.setTxt_Costo("");
 	}
-	
-	public void deshabilitarCampos(){
+
+	public void deshabilitarCampos() {
 		ingreGes.txtNombre.setEditable(false);
-		ingreGes.cmbTipoIn.setEnabled(false);;
+		ingreGes.cmbTipoIn.setEnabled(false);
+		;
 		ingreGes.txtMarca.setEditable(false);
 		ingreGes.txtCaducidad.setEditable(false);
 		ingreGes.txt_Costo.setEditable(false);
@@ -177,10 +173,11 @@ public class IngredientesControlador implements ActionListener {
 		ingreGes.btnActualizar.setText("ACTUALIZAR");
 		ingreGes.btnEliminar.setText("ELIMINAR");
 	}
-	
-	public void habilitarCampos(){
+
+	public void habilitarCampos() {
 		ingreGes.txtNombre.setEditable(true);
-		ingreGes.cmbTipoIn.setEnabled(true);;
+		ingreGes.cmbTipoIn.setEnabled(true);
+		;
 		ingreGes.txtMarca.setEditable(true);
 		ingreGes.txtCaducidad.setEditable(true);
 		ingreGes.txt_Costo.setEditable(true);
@@ -189,9 +186,9 @@ public class IngredientesControlador implements ActionListener {
 		ingreGes.btnActualizar.setText("Guardar");
 		ingreGes.btnEliminar.setText("Cancelar");
 	}
-	
-	public void  actualizar(){
-		
+
+	public void actualizar() {
+
 		ingredientes.setNombre(ingreGes.getTxtNombre());
 		ingredientes.setTipo(ingreGes.getCmbTipoIn());
 		ingredientes.setMarca(ingreGes.getTxtMarca());
@@ -209,10 +206,11 @@ public class IngredientesControlador implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
-	public void eliminar(){
+
+	public void eliminar() {
 		try {
-			modelIngr.eliminarIngrediente(ingredientes);;
+			modelIngr.eliminarIngrediente(ingredientes);
+			;
 			Messages.showMessage("\nSe eliminó correctamente");
 		} catch (ClassNotFoundException e) {
 			Messages.showError("\nNo se eliminó\n" + e.getMessage());
