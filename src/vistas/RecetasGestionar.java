@@ -10,6 +10,7 @@ import controlador.RecetasControlador;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class RecetasGestionar extends JFrame {
 
@@ -67,7 +69,7 @@ public class RecetasGestionar extends JFrame {
 		setResizable(false);
 		setBackground(new Color(255, 165, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 884, 494);
+		setBounds(100, 100, 900, 511);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 165, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,13 +77,13 @@ public class RecetasGestionar extends JFrame {
 		contentPane.setLayout(null);
 
 		lblRegistrarIngredientes = new JLabel("GESTIONAR RECETAS");
-		lblRegistrarIngredientes.setBounds(321, 11, 281, 33);
-		lblRegistrarIngredientes.setForeground(new Color(255, 255, 255));
+		lblRegistrarIngredientes.setBounds(318, 0, 281, 33);
+		lblRegistrarIngredientes.setForeground(Color.BLACK);
 		lblRegistrarIngredientes.setFont(new Font("Andalus", Font.BOLD, 25));
 		contentPane.add(lblRegistrarIngredientes);
 
 		btnAnterior = new JButton("ANTERIOR");
-		btnAnterior.setBounds(154, 424, 110, 30);
+		btnAnterior.setBounds(32, 441, 110, 30);
 		btnAnterior.setPreferredSize(new Dimension(110, 30));
 		btnAnterior.setForeground(new Color(255, 165, 0));
 		btnAnterior.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -89,7 +91,7 @@ public class RecetasGestionar extends JFrame {
 		contentPane.add(btnAnterior);
 
 		btnSiguiente = new JButton("SIGUIENTE");
-		btnSiguiente.setBounds(289, 424, 110, 30);
+		btnSiguiente.setBounds(167, 441, 110, 30);
 		btnSiguiente.setPreferredSize(new Dimension(110, 30));
 		btnSiguiente.setForeground(new Color(255, 165, 0));
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -97,7 +99,7 @@ public class RecetasGestionar extends JFrame {
 		contentPane.add(btnSiguiente);
 
 		btnActualizar = new JButton("ACTUALIZAR");
-		btnActualizar.setBounds(446, 424, 110, 30);
+		btnActualizar.setBounds(495, 441, 110, 30);
 		btnActualizar.setPreferredSize(new Dimension(110, 50));
 		btnActualizar.setForeground(new Color(255, 165, 0));
 		btnActualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -105,7 +107,7 @@ public class RecetasGestionar extends JFrame {
 		contentPane.add(btnActualizar);
 
 		btnEliminar = new JButton("ELIMINAR");
-		btnEliminar.setBounds(583, 424, 110, 30);
+		btnEliminar.setBounds(632, 441, 110, 30);
 		btnEliminar.setPreferredSize(new Dimension(110, 50));
 		btnEliminar.setForeground(new Color(255, 165, 0));
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -113,7 +115,7 @@ public class RecetasGestionar extends JFrame {
 		contentPane.add(btnEliminar);
 
 		btnAtrasVentana = new JButton("Atr\u00E1s");
-		btnAtrasVentana.setBounds(758, 424, 110, 30);
+		btnAtrasVentana.setBounds(774, 441, 110, 30);
 
 		btnAtrasVentana.setPreferredSize(new Dimension(110, 30));
 		btnAtrasVentana.setForeground(new Color(255, 165, 0));
@@ -123,96 +125,97 @@ public class RecetasGestionar extends JFrame {
 
 		cmbPlatillo = new JComboBox();
 		cmbPlatillo.setModel(new DefaultComboBoxModel(new String[] { "Seleccione" }));
-		cmbPlatillo.setBounds(166, 55, 293, 20);
+		cmbPlatillo.setBounds(338, 50, 293, 20);
 		contentPane.add(cmbPlatillo);
 
 		label = new JLabel("Platillo:");
 		label.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label.setBounds(51, 57, 101, 18);
+		label.setBounds(223, 52, 101, 18);
 		contentPane.add(label);
 
 		label_1 = new JLabel("T\u00EDtulo:");
 		label_1.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_1.setBounds(51, 99, 49, 18);
+		label_1.setBounds(223, 94, 49, 18);
 		contentPane.add(label_1);
 
 		txtTitulo = new JTextField();
 		txtTitulo.setColumns(10);
-		txtTitulo.setBounds(166, 98, 293, 20);
+		txtTitulo.setBounds(338, 93, 293, 20);
 		contentPane.add(txtTitulo);
 
 		label_2 = new JLabel("Procedimiento:");
 		label_2.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_2.setBounds(51, 148, 111, 18);
+		label_2.setBounds(314, 168, 111, 18);
 		contentPane.add(label_2);
 
 		txtProcedimiento = new JTextArea();
+		txtProcedimiento.setBackground(SystemColor.menu);
 		txtProcedimiento.setRows(6);
 		txtProcedimiento.setLineWrap(true);
 		txtProcedimiento.setColumns(10);
-		txtProcedimiento.setBounds(166, 129, 293, 83);
+		txtProcedimiento.setBounds(318, 210, 523, 83);
 		contentPane.add(txtProcedimiento);
 
 		label_3 = new JLabel("Terminolog\u00EDa:");
 		label_3.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_3.setBounds(51, 227, 101, 18);
+		label_3.setBounds(502, 139, 101, 18);
 		contentPane.add(label_3);
 
 		txtTerminologia = new JTextField();
 		txtTerminologia.setColumns(10);
-		txtTerminologia.setBounds(166, 226, 293, 20);
+		txtTerminologia.setBounds(612, 138, 183, 20);
 		contentPane.add(txtTerminologia);
 
 		label_4 = new JLabel("Comensales:");
 		label_4.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_4.setBounds(51, 271, 101, 18);
+		label_4.setBounds(498, 168, 101, 18);
 		contentPane.add(label_4);
 
 		txtComenzales = new JSpinner();
-		txtComenzales.setBounds(166, 270, 130, 20);
+		txtComenzales.setBounds(612, 169, 130, 20);
 		contentPane.add(txtComenzales);
 
 		label_5 = new JLabel("Implementaci\u00F3n:");
 		label_5.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_5.setBounds(498, 198, 130, 18);
+		label_5.setBounds(32, 328, 130, 18);
 		contentPane.add(label_5);
 
 		txtImplementacion = new JTextField();
 		txtImplementacion.setColumns(10);
-		txtImplementacion.setBounds(624, 197, 200, 20);
+		txtImplementacion.setBounds(58, 357, 200, 20);
 		contentPane.add(txtImplementacion);
 
 		txtPorcion = new JTextField();
 		txtPorcion.setColumns(10);
-		txtPorcion.setBounds(624, 147, 200, 20);
+		txtPorcion.setBounds(58, 305, 200, 20);
 		contentPane.add(txtPorcion);
 
 		label_6 = new JLabel("Porci\u00F3n:");
 		label_6.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_6.setBounds(498, 150, 101, 18);
+		label_6.setBounds(31, 281, 101, 18);
 		contentPane.add(label_6);
 
 		label_7 = new JLabel("Cantidad:");
 		label_7.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_7.setBounds(498, 101, 101, 18);
+		label_7.setBounds(32, 239, 101, 18);
 		contentPane.add(label_7);
 
 		txtCantidad = new JSpinner();
-		txtCantidad.setBounds(624, 98, 111, 20);
+		txtCantidad.setBounds(104, 257, 111, 20);
 		contentPane.add(txtCantidad);
 
 		label_8 = new JLabel("Ingredientes:");
 		label_8.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		label_8.setBounds(498, 59, 101, 18);
+		label_8.setBounds(76, 168, 101, 18);
 		contentPane.add(label_8);
 
 		cmbIngrediente = new JComboBox();
 		cmbIngrediente.setModel(new DefaultComboBoxModel(new String[] { "Seleccione" }));
-		cmbIngrediente.setBounds(624, 55, 200, 20);
+		cmbIngrediente.setBounds(58, 212, 200, 20);
 		contentPane.add(cmbIngrediente);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(154, 298, 539, 119);
+		scrollPane.setBounds(318, 311, 539, 119);
 		contentPane.add(scrollPane);
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {},
@@ -225,9 +228,16 @@ public class RecetasGestionar extends JFrame {
 		btnAgregar.setForeground(new Color(255, 165, 0));
 		btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAgregar.setBackground(new Color(255, 255, 204));
-		btnAgregar.setBounds(624, 227, 110, 30);
+		btnAgregar.setBounds(105, 388, 110, 30);
 		contentPane.add(btnAgregar);
 
+		JLabel fondo = new JLabel("");
+		Image imagen = new ImageIcon(this.getClass().getResource("/fondoReceta.jpg")).getImage();
+		fondo.setIcon(new ImageIcon(imagen));
+		fondo.setBounds(0, 0, 894, 482);
+		contentPane.add(fondo);
+		
+		
 		btnAgregar.addActionListener(controller);
 		btnActualizar.addActionListener(controller);
 		btnAnterior.addActionListener(controller);
