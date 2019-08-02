@@ -76,17 +76,25 @@ public class DaoReceta {
 				.getStatement("DELETE FROM receta.detalle_receta WHERE id_receta=?");
 
 		preparedStatement.setInt(1, id_receta);
-
 		preparedStatement.executeUpdate();
-		
-		preparedStatement = connectionPostgresql
-				.getStatement("DELETE FROM receta.recetas WHERE id_receta=?");
-
+		preparedStatement = connectionPostgresql.getStatement("DELETE FROM receta.recetas WHERE id_receta=?");
 		preparedStatement.setInt(1, id_receta);
-
 		preparedStatement.executeUpdate();
-		
-		
+		preparedStatement.close();
+
+	}
+
+	public void actualizarIngrediente(Receta receta) throws SQLException, ClassNotFoundException {
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
+				"UPDATE receta.recetas SET titulo=?, procedimiento=?, terminologia=?, comensales=?, id_platillo=? WHERE id_receta=?");
+		preparedStatement.setString(1, receta.getTitulo());
+		preparedStatement.setString(2, receta.getProcedimiento());
+		preparedStatement.setString(3, receta.getTerminologia());
+		preparedStatement.setInt(4, receta.getComensales());
+		preparedStatement.setInt(5, receta.getId_platillo());
+		preparedStatement.setInt(6, receta.getId_receta());
+		preparedStatement.executeUpdate();
 		preparedStatement.close();
 
 	}

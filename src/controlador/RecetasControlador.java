@@ -69,7 +69,18 @@ public class RecetasControlador implements ActionListener {
 			}
 		} else {
 			if (source == recGes.getBtnActualizar()) {
-				System.out.println("Aqui va Actualizar");
+				//
+
+				if (recGes.btnActualizar.getText().equals("ACTUALIZAR")) {
+					habilitarCampos();
+				} else {
+					actualizar();
+					deshabilitarCampos();
+					cargarIngredientes();
+					consultar();
+				}
+
+				//
 			} else if (source == recGes.getBtnAnterior()) {
 
 				if (indiceDet > 0) {
@@ -83,8 +94,6 @@ public class RecetasControlador implements ActionListener {
 				consultar();
 				consultarDetalle();
 			} else if (source == recGes.getBtnEliminar()) {
-				System.out.println("Aqui va Eliminar");
-
 				if (recGes.getBtnEliminar().equals("Cancelar")) {
 					deshabilitarCampos();
 					cargarIngredientes();
@@ -258,6 +267,21 @@ public class RecetasControlador implements ActionListener {
 	}
 
 	/**
+	 * Metodo para habilitar los campos de la vista
+	 */
+	private void habilitarCampos() {
+		recGes.txtCantidad.setEnabled(true);
+		recGes.txtComenzales.setEnabled(true);
+		recGes.txtImplementacion.setEditable(true);
+		recGes.txtPorcion.setEditable(true);
+		recGes.txtTerminologia.setEditable(true);
+		recGes.txtTitulo.setEditable(true);
+		recGes.btnActualizar.setText("GUARDAR");
+		recGes.btnEliminar.setText("CANCELAR");
+
+	}
+
+	/**
 	 * Metodo para eliminar
 	 */
 
@@ -271,6 +295,31 @@ public class RecetasControlador implements ActionListener {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			Messages.showError("\nNo se eliminó\n" + e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Metodo para Actualizar la receta
+	 */
+
+	private void actualizar() {
+		Receta receta = new Receta();
+		receta.setTitulo(recGes.getTxtTitulo());
+		receta.setProcedimiento(recGes.getTxtProcedimiento());
+		receta.setTerminologia(recGes.getTxtTerminologia());
+		receta.setComensales(recGes.getTxtComenzales());
+		receta.setId_platillo(crudRec.consultarID(recGes.getCmbPlatilloS()));
+		receta.setId_receta(listaRece.get(indice).getId_receta());
+		try {
+			modelRece.actualizarIngrediente(receta);
+			Messages.showMessage("\nSe actualizó correctamente");
+		} catch (ClassNotFoundException e) {
+			Messages.showError("\nNo se actualizó\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			Messages.showError("\nNo se actualizó\n" + e.getMessage());
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

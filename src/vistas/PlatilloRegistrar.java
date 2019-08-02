@@ -53,14 +53,14 @@ public class PlatilloRegistrar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 204, 102));
+		contentPane.setBackground(new Color(255, 165, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		lblRegistrarIngredientes = new JLabel("REGISTRAR PLATILLO");
-		lblRegistrarIngredientes.setBackground(new Color(102, 102, 102));
-		lblRegistrarIngredientes.setBounds(82, 11, 273, 33);
+		lblRegistrarIngredientes.setBackground(new Color(255, 255, 255));
+		lblRegistrarIngredientes.setBounds(110, 11, 273, 33);
 		lblRegistrarIngredientes.setForeground(new Color(102, 102, 102));
 		lblRegistrarIngredientes.setFont(new Font("Andalus", Font.BOLD, 25));
 		contentPane.add(lblRegistrarIngredientes);

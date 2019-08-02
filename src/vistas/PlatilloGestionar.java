@@ -54,14 +54,14 @@ public class PlatilloGestionar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 458, 433);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 204, 102));
+		contentPane.setBackground(new Color(255, 165, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		lblRegistrarIngredientes = new JLabel("CONSULTAR PLATILLOS");
 		lblRegistrarIngredientes.setBounds(78, 11, 299, 33);
-		lblRegistrarIngredientes.setForeground(new Color(102, 102, 102));
+		lblRegistrarIngredientes.setForeground(new Color(255, 255, 255));
 		lblRegistrarIngredientes.setFont(new Font("Andalus", Font.BOLD, 25));
 		contentPane.add(lblRegistrarIngredientes);
 

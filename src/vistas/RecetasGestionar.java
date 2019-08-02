@@ -163,7 +163,7 @@ public class RecetasGestionar extends JFrame {
 		txtTerminologia.setBounds(166, 226, 293, 20);
 		contentPane.add(txtTerminologia);
 
-		label_4 = new JLabel("Comenzales:");
+		label_4 = new JLabel("Comensales:");
 		label_4.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		label_4.setBounds(51, 271, 101, 18);
 		contentPane.add(label_4);
@@ -422,8 +422,8 @@ public class RecetasGestionar extends JFrame {
 	/**
 	 * @return the txtComenzales
 	 */
-	public String getTxtComenzales() {
-		return (String) txtComenzales.getValue();
+	public int getTxtComenzales() {
+		return (int) txtComenzales.getValue();
 	}
 
 	/**

@@ -151,7 +151,7 @@ public class RecetasRegistrar extends JFrame {
 		cmbPlatillo.setBounds(156, 54, 293, 20);
 		contentPane.add(cmbPlatillo);
 
-		lblComenzales = new JLabel("Comenzales:");
+		lblComenzales = new JLabel("Comensales:");
 		lblComenzales.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		lblComenzales.setBounds(41, 270, 101, 18);
 		contentPane.add(lblComenzales);

@@ -27,4 +27,9 @@ public class ModelReceta {
 		
 	}
 
+	public void actualizarIngrediente(Receta receta) throws ClassNotFoundException, SQLException{
+		dao.actualizarIngrediente(receta);
+		
+	}
+
 }

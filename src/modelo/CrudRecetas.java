@@ -121,7 +121,7 @@ public class CrudRecetas {
 	 * @param cmbPlatilloS
 	 * @return id del platillo
 	 */
-	private int consultarID(String cmbPlatilloS) {
+	public int consultarID(String cmbPlatilloS) {
 		int id = 0;
 		String consulta = "SELECT id_platillo FROM platillos where nombre = ?";
 		try {

@@ -197,10 +197,6 @@ public class IngredientesControlador implements ActionListener {
 		ingredientes.setMarca(ingreGes.getTxtMarca());
 		ingredientes.setCaducidad(ingreGes.getTxtCaducidad());
 		ingredientes.setCosto(Double.parseDouble(ingreGes.getTxt_Costo()));
-
-		System.out.println("" + ingredientes.getNombre() + ingredientes.getTipo() + ingredientes.getMarca()
-				+ ingredientes.getCaducidad() + ingredientes.getCosto());
-		
 		try {
 			modelIngr.actualizarIngrediente(ingredientes);
 			Messages.showMessage("\nSe actualizó correctamente");
