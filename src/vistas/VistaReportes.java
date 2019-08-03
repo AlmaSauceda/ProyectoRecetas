@@ -1,14 +1,10 @@
 package vistas;
 
 import java.awt.BorderLayout; 
-import java.awt.Dimension;
-import java.awt.FlowLayout; 
-import java.awt.GridLayout; 
-
-import javax.swing.ImageIcon;
+import java.awt.Dimension; 
+import java.awt.GridLayout;  
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JFrame; 
 import javax.swing.JPanel; 
 import controlador.ReporteControlador; 
 
@@ -16,8 +12,7 @@ public class VistaReportes extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private static final int MIN_V = 550;
 	private static final int MIN_H = 300;
-	
-	private static final String SRC_MENU = "imgs/ic_menu.png";
+	 
 
 	private static  String title = "REPORTES";
    
