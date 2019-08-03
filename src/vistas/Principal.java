@@ -31,9 +31,13 @@ public class Principal extends JFrame {
 	private JButton btnGestionarRece;
 	private JButton btnAgregarPlati;
 	private JButton btnGestionarPlat;
+<<<<<<< HEAD
 	private JButton btnFiltroIngrediente;
 	private JButton btnFiltroPlatillos;
 
+=======
+	private JButton btnReportes;
+>>>>>>> 09eb218c7ed181270cd8a61deafa02c640f7d30c
 	/**
 	 * Create the frame.
 	 */
@@ -107,8 +111,13 @@ public class Principal extends JFrame {
 		btnGestionarPlat.setBounds(211, 177, 138, 24);
 		contentPane.add(btnGestionarPlat);
 		Image imagen = new ImageIcon(this.getClass().getResource("/fontoPrincipal.jpg")).getImage();
+<<<<<<< HEAD
 
 		JButton btnReportes = new JButton("REPORTES");
+=======
+		
+	    btnReportes = new JButton("REPORTES");
+>>>>>>> 09eb218c7ed181270cd8a61deafa02c640f7d30c
 		btnReportes.setFont(new Font("Arial", Font.ITALIC, 15));
 		btnReportes.setBackground(new Color(255, 255, 102));
 		btnReportes.setBounds(363, 218, 138, 24);
@@ -137,8 +146,12 @@ public class Principal extends JFrame {
 		btnGestionarIngre.addActionListener(new Navegadores(this));
 		btnGestionarPlat.addActionListener(new Navegadores(this));
 		btnGestionarRece.addActionListener(new Navegadores(this));
+<<<<<<< HEAD
 		btnFiltroIngrediente.addActionListener(new Navegadores(this));
 		btnFiltroPlatillos.addActionListener(new Navegadores(this));
+=======
+		btnReportes.addActionListener(new Navegadores(this));
+>>>>>>> 09eb218c7ed181270cd8a61deafa02c640f7d30c
 	}
 
 	/**
@@ -183,6 +196,7 @@ public class Principal extends JFrame {
 		return btnGestionarPlat;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * @return the btnFiltros
 	 */
@@ -198,5 +212,10 @@ public class Principal extends JFrame {
 	}
 	
 	
+=======
+	public JButton getBtnReportes() {
+		return btnReportes;
+	}
+>>>>>>> 09eb218c7ed181270cd8a61deafa02c640f7d30c
 	
 }

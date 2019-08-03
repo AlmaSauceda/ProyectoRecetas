@@ -49,6 +49,7 @@ public class Ventanas {
 		princi.dispose();
 
 	}
+<<<<<<< HEAD
 
 	public void crearVentanaFiltroIngrediente(Principal princi) {
 		princi.setVisible(false);
@@ -63,5 +64,14 @@ public class Ventanas {
 		p.setVisible(true);
 		princi.dispose();
 		
+=======
+	//Dev. by M.G.
+	public void crearVentanaReporte(Principal princi) {
+		princi.setVisible(false);
+		VistaReportes p = new VistaReportes();
+		p.setVisible(true);
+		princi.dispose();
+
+>>>>>>> 09eb218c7ed181270cd8a61deafa02c640f7d30c
 	}
 }
