@@ -109,7 +109,8 @@ public class Principal extends JFrame {
 		btnGestionarPlat.setBounds(211, 177, 138, 24);
 		contentPane.add(btnGestionarPlat);
 		Image imagen = new ImageIcon(this.getClass().getResource("/fontoPrincipal.jpg")).getImage();
-		JButton btnReportes = new JButton("REPORTES");
+		
+		btnReportes = new JButton("REPORTES");
 		btnReportes = new JButton("REPORTES");
 		btnReportes.setFont(new Font("Arial", Font.ITALIC, 15));
 		btnReportes.setBackground(new Color(255, 255, 102));
