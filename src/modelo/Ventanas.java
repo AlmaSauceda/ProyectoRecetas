@@ -49,4 +49,19 @@ public class Ventanas {
 		princi.dispose();
 
 	}
+
+	public void crearVentanaFiltroIngrediente(Principal princi) {
+		princi.setVisible(false);
+		IngredientesFiltro p = new IngredientesFiltro();
+		p.setVisible(true);
+		princi.dispose();
+	}
+
+	public void crearVentanaFiltroPlatillos(Principal princi) {
+		princi.setVisible(false);
+		PlatilloFiltro p = new PlatilloFiltro();
+		p.setVisible(true);
+		princi.dispose();
+		
+	}
 }

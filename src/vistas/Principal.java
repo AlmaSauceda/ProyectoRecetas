@@ -31,6 +31,8 @@ public class Principal extends JFrame {
 	private JButton btnGestionarRece;
 	private JButton btnAgregarPlati;
 	private JButton btnGestionarPlat;
+	private JButton btnFiltroIngrediente;
+	private JButton btnFiltroPlatillos;
 
 	/**
 	 * Create the frame.
@@ -105,30 +107,38 @@ public class Principal extends JFrame {
 		btnGestionarPlat.setBounds(211, 177, 138, 24);
 		contentPane.add(btnGestionarPlat);
 		Image imagen = new ImageIcon(this.getClass().getResource("/fontoPrincipal.jpg")).getImage();
-		
+
 		JButton btnReportes = new JButton("REPORTES");
 		btnReportes.setFont(new Font("Arial", Font.ITALIC, 15));
 		btnReportes.setBackground(new Color(255, 255, 102));
-		btnReportes.setBounds(136, 218, 138, 24);
+		btnReportes.setBounds(363, 218, 138, 24);
 		contentPane.add(btnReportes);
-				
-				JButton btnFiltros = new JButton("FILTROS");
-				btnFiltros.setFont(new Font("Arial", Font.ITALIC, 15));
-				btnFiltros.setBackground(new Color(255, 255, 102));
-				btnFiltros.setBounds(284, 220, 138, 24);
-				contentPane.add(btnFiltros);
-				
-						JLabel fondo = new JLabel("");
-						fondo.setIcon(new ImageIcon(imagen));
-						fondo.setBounds(0, 0, 567, 320);
-						contentPane.add(fondo);
+
+		btnFiltroIngrediente = new JButton("FILTRO");
+		btnFiltroIngrediente.setFont(new Font("Arial", Font.ITALIC, 15));
+		btnFiltroIngrediente.setBackground(new Color(255, 255, 102));
+		btnFiltroIngrediente.setBounds(55, 218, 138, 24);
+		contentPane.add(btnFiltroIngrediente);
 		
+		btnFiltroPlatillos = new JButton("FILTRO");
+		btnFiltroPlatillos.setFont(new Font("Arial", Font.ITALIC, 15));
+		btnFiltroPlatillos.setBackground(new Color(255, 255, 102));
+		btnFiltroPlatillos.setBounds(211, 220, 138, 24);
+		contentPane.add(btnFiltroPlatillos);
+
+		JLabel fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon(imagen));
+		fondo.setBounds(0, 0, 567, 320);
+		contentPane.add(fondo);
+
 		btnAgregarIngre.addActionListener(new Navegadores(this));
 		btnAgregarPlati.addActionListener(new Navegadores(this));
 		btnAgregarRece.addActionListener(new Navegadores(this));
 		btnGestionarIngre.addActionListener(new Navegadores(this));
 		btnGestionarPlat.addActionListener(new Navegadores(this));
 		btnGestionarRece.addActionListener(new Navegadores(this));
+		btnFiltroIngrediente.addActionListener(new Navegadores(this));
+		btnFiltroPlatillos.addActionListener(new Navegadores(this));
 	}
 
 	/**
@@ -172,4 +182,21 @@ public class Principal extends JFrame {
 	public Object getBtnGestionarPlat() {
 		return btnGestionarPlat;
 	}
+
+	/**
+	 * @return the btnFiltros
+	 */
+	public Object getBtnFiltros() {
+		return btnFiltroIngrediente;
+	}
+
+	/**
+	 * @return the btnFiltroPlatillos
+	 */
+	public Object getBtnFiltroPlatillos() {
+		return btnFiltroPlatillos;
+	}
+	
+	
+	
 }

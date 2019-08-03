@@ -31,6 +31,10 @@ public class Navegadores implements ActionListener {
 			venta.crearVentanaGestionarPlat(princi);
 		} else if (source == princi.getBtnGestionarRece()) {
 			venta.crearVentanaGestionarRece(princi);
+		} else if (source == princi.getBtnFiltros()) {
+			venta.crearVentanaFiltroIngrediente(princi);
+		} else if(source == princi.getBtnFiltroPlatillos()) {
+			venta.crearVentanaFiltroPlatillos(princi);
 		}
 	}
 

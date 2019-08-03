@@ -152,7 +152,6 @@ public class RecetasControlador implements ActionListener {
 				fila[3] = listaDetRece.get(i).getImplementacion();
 				((DefaultTableModel) recGes.getTable().getModel()).addRow(fila);
 			}
-
 			recGes.setTable(recGes.getTable());
 		}
 	}

@@ -25,27 +25,17 @@ public class DaoReceta {
 	 *              base de datos y se llene el combo
 	 * @return el combo lleno con los datos de la tabla
 	 */
-	public JComboBox cargarCombo(JComboBox combo, String tabla) {
+	public JComboBox cargarCombo(JComboBox combo, String tabla) throws SQLException, ClassNotFoundException {
 		String consulta = "SELECT Nombre FROM " + tabla;
-		try {
-
-			conexion = ConectionPostgresql.getInstance();
-			PreparedStatement ps = conexion.getStatement(consulta);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				combo.addItem(rs.getString(1));
-			}
-			ps.close();
-			return combo;
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return combo;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return combo;
+		conexion = ConectionPostgresql.getInstance();
+		PreparedStatement ps = conexion.getStatement(consulta);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			combo.addItem(rs.getString(1));
 		}
+		ps.close();
+		return combo;
+
 	}
 
 	/**

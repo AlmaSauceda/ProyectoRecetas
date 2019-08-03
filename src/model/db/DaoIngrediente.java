@@ -12,6 +12,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class DaoIngrediente {
 
 	public void registrarIngredientes(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
@@ -32,8 +36,8 @@ public class DaoIngrediente {
 
 	// pendiente
 	public ArrayList<Ingredientes> consultarIngredientes() throws SQLException, ClassNotFoundException {
-		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 
+		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql
 				.getStatement("SELECT * FROM receta.ingredientes order by id_ingrediente");
 
@@ -86,5 +90,49 @@ public class DaoIngrediente {
 
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
+	}
+
+	public JComboBox cargarComboFiltro(String cmbFiltroString, JComboBox combo)
+			throws SQLException, ClassNotFoundException {
+		if (cmbFiltroString.equalsIgnoreCase("-Seleccione-")) {
+			return combo;
+		} else {
+			String consulta = "SELECT " + cmbFiltroString + " FROM receta.ingredientes group by " + cmbFiltroString
+					+ ";";
+			// System.out.println(consulta);
+			ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+			PreparedStatement preparedStatement = connectionPostgresql.getStatement(consulta);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				combo.addItem(resultSet.getString(1));
+			}
+			resultSet.close();
+			return combo;
+		}
+
+	}
+
+	public JTable llenarTablaF(JTable table, String cmbDatosString, String string)
+			throws SQLException, ClassNotFoundException {
+		if (cmbDatosString.equalsIgnoreCase("-Seleccione-")) {
+			return table;
+		} else {
+			String consulta = "SELECT * FROM receta.ingredientes where " + string + " = '" + cmbDatosString + "';";
+			ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
+			PreparedStatement preparedStatement = connectionPostgresql.getStatement(consulta);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				int numCols = table.getModel().getColumnCount();
+				Object[] fila = new Object[numCols];
+				fila[0] = resultSet.getString("nombre");
+				fila[1] = resultSet.getString("tipo");
+				fila[2] = resultSet.getString("marca");
+				fila[3] = resultSet.getString("caducidad");
+				fila[4] = "$ " + resultSet.getString("costo");
+				((DefaultTableModel) table.getModel()).addRow(fila);
+			}
+			resultSet.close();
+			return table;
+		}
 	}
 }

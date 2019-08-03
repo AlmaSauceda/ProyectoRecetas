@@ -3,6 +3,10 @@ package modelo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+
 import model.db.DaoPlatillo;
 
 /**
@@ -37,6 +41,16 @@ public class ModelPlatillos {
 	
 	public void deletePlatillos(Platillos platillos) throws ClassNotFoundException, SQLException{
 		dao.deletePlatillo(platillos);
+	}
+
+	public JComboBox cargarComboFiltro(String cmbFiltroString, JComboBox cmbDatosCmb) throws ClassNotFoundException, SQLException{
+		// TODO Auto-generated method stub
+		return dao.cargarComboFiltro(cmbFiltroString, cmbDatosCmb);
+	}
+
+	public JTable llenarTablaF(JTable table, String cmbDatosString, String cmbFiltroString) throws ClassNotFoundException, SQLException{
+		// TODO Auto-generated method stub
+		return dao.llenarTablaF(table, cmbDatosString, cmbFiltroString);
 	}
 
 }

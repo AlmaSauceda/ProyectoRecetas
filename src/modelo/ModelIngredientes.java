@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+
 import model.db.DaoIngrediente;
 
 public class ModelIngredientes {
@@ -29,5 +32,14 @@ private DaoIngrediente dao;
 	
 	public void eliminarIngrediente(Ingredientes ingrediente) throws ClassNotFoundException, SQLException{
 		dao.eliminarIngrediente(ingrediente);
+	}
+
+	public JComboBox cargarComboFiltro(String cmbFiltroString, JComboBox jComboBox) throws ClassNotFoundException, SQLException{
+		return dao.cargarComboFiltro(cmbFiltroString, jComboBox);
+	}
+
+	public JTable llenarTablaF(JTable table, String cmbDatosString, String string) throws ClassNotFoundException, SQLException{
+		// TODO Auto-generated method stub
+		return dao.llenarTablaF(table, cmbDatosString, string);
 	}
 }
