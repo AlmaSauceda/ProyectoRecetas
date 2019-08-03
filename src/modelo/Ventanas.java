@@ -49,4 +49,12 @@ public class Ventanas {
 		princi.dispose();
 
 	}
+	//Dev. by M.G.
+	public void crearVentanaReporte(Principal princi) {
+		princi.setVisible(false);
+		VistaReportes p = new VistaReportes();
+		p.setVisible(true);
+		princi.dispose();
+
+	}
 }

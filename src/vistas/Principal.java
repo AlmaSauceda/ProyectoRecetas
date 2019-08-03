@@ -31,7 +31,7 @@ public class Principal extends JFrame {
 	private JButton btnGestionarRece;
 	private JButton btnAgregarPlati;
 	private JButton btnGestionarPlat;
-
+	private JButton btnReportes;
 	/**
 	 * Create the frame.
 	 */
@@ -106,7 +106,7 @@ public class Principal extends JFrame {
 		contentPane.add(btnGestionarPlat);
 		Image imagen = new ImageIcon(this.getClass().getResource("/fontoPrincipal.jpg")).getImage();
 		
-		JButton btnReportes = new JButton("REPORTES");
+	    btnReportes = new JButton("REPORTES");
 		btnReportes.setFont(new Font("Arial", Font.ITALIC, 15));
 		btnReportes.setBackground(new Color(255, 255, 102));
 		btnReportes.setBounds(136, 218, 138, 24);
@@ -129,6 +129,7 @@ public class Principal extends JFrame {
 		btnGestionarIngre.addActionListener(new Navegadores(this));
 		btnGestionarPlat.addActionListener(new Navegadores(this));
 		btnGestionarRece.addActionListener(new Navegadores(this));
+		btnReportes.addActionListener(new Navegadores(this));
 	}
 
 	/**
@@ -172,4 +173,9 @@ public class Principal extends JFrame {
 	public Object getBtnGestionarPlat() {
 		return btnGestionarPlat;
 	}
+
+	public JButton getBtnReportes() {
+		return btnReportes;
+	}
+	
 }

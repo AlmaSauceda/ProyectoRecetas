@@ -244,6 +244,7 @@ public class RecetasGestionar extends JFrame {
 		btnAtrasVentana.addActionListener(controller);
 		btnEliminar.addActionListener(controller);
 		btnSiguiente.addActionListener(controller);
+		
 	}
 
 	/**
