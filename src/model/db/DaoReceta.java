@@ -232,6 +232,13 @@ public class DaoReceta {
 
 	}
 
+	/**
+	 * Metodo para recuperar el Nombre del ingrediente con el ID del ingrediente
+	 * @param string
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public String recuperarNombreIngrediente(int string) throws SQLException, ClassNotFoundException {
 		String id = "";
 		String consulta = "SELECT nombre  FROM ingredientes where id_ingrediente= ?";
@@ -279,6 +286,13 @@ public class DaoReceta {
 		return table;
 	}
 
+	/**
+	 * Metodo para consultar el Nombre del platillo usando el id
+	 * @param id_platillo
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public String recuperarNombre(int id_platillo) throws SQLException, ClassNotFoundException {
 		String id = "";
 		String consulta = "SELECT nombre FROM platillos where id_platillo= ?";

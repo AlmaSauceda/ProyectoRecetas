@@ -15,6 +15,9 @@ public class Navegadores implements ActionListener {
 		this.princi = princi;
 	}
 
+	/**
+	 * Metodo para utilizar el ActionEvent para el uso de los botones
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		venta = new Ventanas();
@@ -33,12 +36,12 @@ public class Navegadores implements ActionListener {
 			venta.crearVentanaGestionarRece(princi);
 		} else if (source == princi.getBtnFiltros()) {
 			venta.crearVentanaFiltroIngrediente(princi);
-		} else if(source == princi.getBtnFiltroPlatillos()) {
+		} else if (source == princi.getBtnFiltroPlatillos()) {
 			venta.crearVentanaFiltroPlatillos(princi);
 		} else if (source == princi.getBtnReportes()) {
 			venta.crearVentanaReporte(princi);
 		}
-		
+
 	}
 
 }

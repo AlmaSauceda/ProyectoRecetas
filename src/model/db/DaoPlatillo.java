@@ -19,6 +19,12 @@ public class DaoPlatillo {
 	private static final String _UPDATE = "UPDATE platillos SET nombre=?,"
 			+ "descripcion=?,costo=?,categoria=?,nacionalidad=? WHERE id_platillo=?";
 
+	/**
+	 * Medoto para agregar platillos a la BD
+	 * @param platillos
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void addPlatillo(Platillos platillos) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_ADD);
@@ -34,6 +40,12 @@ public class DaoPlatillo {
 
 	}
 
+	/**
+	 * Metodo para cargar todos los datos y mandarlos como una lista
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public ArrayList<Platillos> getDatos() throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_ALL);
@@ -45,7 +57,6 @@ public class DaoPlatillo {
 		while (tableResultSet.next()) {
 
 			Platillos platillos = new Platillos();
-
 			platillos.setId_platillo(tableResultSet.getInt(1));
 			platillos.setNombre(tableResultSet.getString(2));
 			platillos.setDescripcion(tableResultSet.getString(3));
@@ -62,16 +73,26 @@ public class DaoPlatillo {
 		return listPlatillos;
 	}
 
+	/**
+	 * Metodo para eliminar los platillos
+	 * @param platillo
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void deletePlatillo(Platillos platillo) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(_DELETE);
-
 		preparedStatement.setInt(1, platillo.getId_platillo());
-
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 	}
 
+	/**
+	 * Metodo para eliminar los platillos de la bd
+	 * @param platillos
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void updatePlatillo(Platillos platillos) throws SQLException, ClassNotFoundException {
 
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
@@ -87,7 +108,15 @@ public class DaoPlatillo {
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 	}
-
+	
+	/**
+	 * Metodo para cargar el segundo combo de los filtros
+	 * @param cmbFiltroString
+	 * @param combo
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public JComboBox cargarComboFiltro(String cmbFiltroString, JComboBox combo)
 			throws SQLException, ClassNotFoundException {
 		if (cmbFiltroString.equalsIgnoreCase("-Seleccione-")) {
@@ -106,7 +135,16 @@ public class DaoPlatillo {
 		}
 
 	}
-
+	
+	/**
+	 * Metodo para llenar la tabla con valores de l BD
+	 * @param table
+	 * @param cmbDatosString
+	 * @param cmb
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public JTable llenarTablaF(JTable table, String cmbDatosString, String cmb)
 			throws SQLException, ClassNotFoundException {
 		if (cmbDatosString.equalsIgnoreCase("-Seleccione-")) {

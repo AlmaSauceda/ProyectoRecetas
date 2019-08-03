@@ -1,5 +1,12 @@
 package modelo;
 
+/***
+ * Develop by Angel
+ * 
+ * Clase para cambia de ventanas en diferentes partes del programa
+ * 
+ * **/
+
 import vistas.*;
 
 public class Ventanas {

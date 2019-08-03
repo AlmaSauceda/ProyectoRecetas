@@ -1,3 +1,10 @@
+/***
+ * Develop by Angel
+ * 
+ * Clase de union entre el controlador y el DAO para gestionar las recetas
+ * 
+ * **/
+
 package modelo;
 
 import java.sql.SQLException;

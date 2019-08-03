@@ -25,12 +25,14 @@ public class IngredientesControlador implements ActionListener {
 	private ArrayList<Ingredientes> listaIng = new ArrayList<Ingredientes>();
 	private int indice = 0;
 
+	// Constructor con parametro de registrar ingrediente
 	public IngredientesControlador(IngredientesRegistrar ingreReg) {
 		viewIngrediente = ingreReg;
 		modelIngr = new ModelIngredientes();
 		ingredientes = new Ingredientes();
 	}
 
+	// constructor con parametro de gestionar ingredintes
 	public IngredientesControlador(IngredientesGestionar ingreGes) {
 		this.ingreGes = ingreGes;
 		modelIngr = new ModelIngredientes();
@@ -38,6 +40,9 @@ public class IngredientesControlador implements ActionListener {
 		consultar();
 	}
 
+	/**
+	 * Metodo para utilizar el ActionEvent para el uso de los botones
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		Object source = evt.getSource();
@@ -97,6 +102,9 @@ public class IngredientesControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para registrar Ingredienes
+	 */
 	private void registrar() {
 		ingredientes.setNombre(viewIngrediente.getTxtNombre());
 		ingredientes.setTipo(viewIngrediente.getCmbIngrediente());
@@ -118,6 +126,9 @@ public class IngredientesControlador implements ActionListener {
 
 	}
 
+	/**
+	 * Metodo para consultar ingredientes
+	 */
 	public void consultar() {
 
 		if (listaIng.size() > 0) {
@@ -141,6 +152,9 @@ public class IngredientesControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para cargar las listas de los ingredientes
+	 */
 	public void cargarIngredientes() {
 		listaIng = new ArrayList<Ingredientes>();
 		try {
@@ -153,6 +167,9 @@ public class IngredientesControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para limpiar el formulario
+	 */
 	public void limpiar() {
 		viewIngrediente.setTxtNombre("");
 		viewIngrediente.setCmbIngrediente("-Seleccione-");
@@ -161,6 +178,9 @@ public class IngredientesControlador implements ActionListener {
 		viewIngrediente.setTxt_Costo("");
 	}
 
+	/**
+	 * Metodo para deshabilitar los campos del formulario GestionIngredientes
+	 */
 	public void deshabilitarCampos() {
 		ingreGes.txtNombre.setEditable(false);
 		ingreGes.cmbTipoIn.setEnabled(false);
@@ -174,6 +194,9 @@ public class IngredientesControlador implements ActionListener {
 		ingreGes.btnEliminar.setText("ELIMINAR");
 	}
 
+	/**
+	 * Metodo para habilitar los campos del formulario GestionIngredientes
+	 */
 	public void habilitarCampos() {
 		ingreGes.txtNombre.setEditable(true);
 		ingreGes.cmbTipoIn.setEnabled(true);
@@ -187,6 +210,9 @@ public class IngredientesControlador implements ActionListener {
 		ingreGes.btnEliminar.setText("Cancelar");
 	}
 
+	/**
+	 * Metodo para actualizar los ingredientes
+	 */
 	public void actualizar() {
 
 		ingredientes.setNombre(ingreGes.getTxtNombre());
@@ -207,6 +233,9 @@ public class IngredientesControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para eliminar los ingredientes
+	 */
 	public void eliminar() {
 		try {
 			modelIngr.eliminarIngrediente(ingredientes);

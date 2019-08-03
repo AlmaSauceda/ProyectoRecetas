@@ -1,3 +1,10 @@
+/***
+ * Develop by joseline
+ * 
+ * Clase de union entre el controlador y el DAO para gestionar los Ingredientes
+ * 
+ * **/
+
 
 package modelo;
 

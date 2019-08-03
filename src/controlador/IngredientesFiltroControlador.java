@@ -25,12 +25,16 @@ public class IngredientesFiltroControlador implements ActionListener {
 	private IngredientesFiltro vista;
 	private ModelIngredientes modelIngr;
 
+	// constructor con parametro de la vista
 	public IngredientesFiltroControlador(IngredientesFiltro vista) {
 		this.vista = vista;
 		this.modelIngr = new ModelIngredientes();
 		this.crudIng = new CrudIngredientes();
 	}
 
+	/**
+	 * Metodo para utilizar el ActionEvent para el uso de los botones
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == vista.getCmbFiltro()) {
@@ -42,8 +46,10 @@ public class IngredientesFiltroControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para llenar los registros de la tabla
+	 */
 	private void llenarTabla() {
-
 		try {
 			vista.setTable(eliminarValoresTabla(vista.getTable()));
 			vista.setTable(
@@ -55,6 +61,12 @@ public class IngredientesFiltroControlador implements ActionListener {
 
 	}
 
+	/**
+	 * Metodo para vaciar la tabla para posteriormente llenarla
+	 * 
+	 * @param table
+	 * @return
+	 */
 	public JTable eliminarValoresTabla(JTable table) {
 		DefaultTableModel tb = (DefaultTableModel) table.getModel();
 		int a = table.getRowCount() - 1;
@@ -65,6 +77,9 @@ public class IngredientesFiltroControlador implements ActionListener {
 		return table;
 	}
 
+	/**
+	 * Metodo para cargar el segundo combo con los datos de la consulta
+	 */
 	public void cargarCombo() {
 		try {
 			limpiarCombo();
@@ -75,6 +90,9 @@ public class IngredientesFiltroControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para vaciar el segundo combo para posteriormente llenarlo
+	 */
 	private void limpiarCombo() {
 		vista.cmbDatos.setModel(new DefaultComboBoxModel(new String[] { "-Seleccione-" }));
 

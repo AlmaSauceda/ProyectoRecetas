@@ -18,6 +18,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class DaoIngrediente {
 
+	/**
+	 * Metodo para registrar los ingredientes
+	 * 
+	 * @param ingrediente
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void registrarIngredientes(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
@@ -34,42 +41,45 @@ public class DaoIngrediente {
 
 	}
 
-	// pendiente
+	/**
+	 * Metodo para consultar los ingredientes y devuelve una lista con los ingredientes de la BD
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public ArrayList<Ingredientes> consultarIngredientes() throws SQLException, ClassNotFoundException {
-
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql
 				.getStatement("SELECT * FROM receta.ingredientes order by id_ingrediente");
-
 		ResultSet resultSet = preparedStatement.executeQuery();
-
 		ArrayList<Ingredientes> listaIng = new ArrayList<Ingredientes>();
-
 		while (resultSet.next()) {
 
 			Ingredientes ing = new Ingredientes();
-
 			ing.setId_ingrediente(resultSet.getInt("id_ingrediente"));
 			ing.setNombre(resultSet.getString("nombre"));
 			ing.setTipo(resultSet.getString("tipo"));
 			ing.setMarca(resultSet.getString("marca"));
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			ing.setCaducidad(dateFormat.format(resultSet.getDate("caducidad")));
-
 			ing.setCosto(resultSet.getDouble("costo"));
-
 			listaIng.add(ing);
 		}
 		preparedStatement.close();
 		return listaIng;
 	}
 
+	/**
+	 * Metodo para actualizar los ingredientes
+	 * @param ingrediente
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void actualizarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
 
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql.getStatement(
 				"UPDATE receta.ingredientes SET nombre=?, tipo=?, marca=?, caducidad=?, costo=? WHERE id_ingrediente=?");
-
 		preparedStatement.setString(1, ingrediente.getNombre());
 		preparedStatement.setString(2, ingrediente.getTipo());
 		preparedStatement.setString(3, ingrediente.getMarca());
@@ -81,17 +91,29 @@ public class DaoIngrediente {
 		preparedStatement.close();
 	}
 
+	/**
+	 * Metodo para eliminar los ingredientes de la BD
+	 * @param ingrediente
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void eliminarIngrediente(Ingredientes ingrediente) throws SQLException, ClassNotFoundException {
 		ConectionPostgresql connectionPostgresql = ConectionPostgresql.getInstance();
 		PreparedStatement preparedStatement = connectionPostgresql
 				.getStatement("DELETE FROM receta.ingredientes WHERE id_ingrediente=?");
-
 		preparedStatement.setInt(1, ingrediente.getId_ingrediente());
-
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 	}
 
+	/**
+	 * Metodo para cargar el combo con un filtro
+	 * @param cmbFiltroString
+	 * @param combo
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public JComboBox cargarComboFiltro(String cmbFiltroString, JComboBox combo)
 			throws SQLException, ClassNotFoundException {
 		if (cmbFiltroString.equalsIgnoreCase("-Seleccione-")) {
@@ -111,7 +133,16 @@ public class DaoIngrediente {
 		}
 
 	}
-
+	
+	/**
+	 * Metodo para llenar la tabla y enviarla
+	 * @param table
+	 * @param cmbDatosString
+	 * @param string
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public JTable llenarTablaF(JTable table, String cmbDatosString, String string)
 			throws SQLException, ClassNotFoundException {
 		if (cmbDatosString.equalsIgnoreCase("-Seleccione-")) {

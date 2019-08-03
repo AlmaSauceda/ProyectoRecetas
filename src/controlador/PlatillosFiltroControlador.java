@@ -24,6 +24,9 @@ public class PlatillosFiltroControlador implements ActionListener {
 		modelPlat = new ModelPlatillos();
 	}
 
+	/**
+	 * Metodo para utilizar el ActionEvent para el uso de los botones
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -37,8 +40,10 @@ public class PlatillosFiltroControlador implements ActionListener {
 
 	}
 
+	/**
+	 * Metodo para llenar la tabla con valores de la base de datos
+	 */
 	private void llenarTabla() {
-
 		try {
 			vista.setTable(eliminarValoresTabla(vista.getTable()));
 			vista.setTable(
@@ -49,6 +54,11 @@ public class PlatillosFiltroControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para vaciar la tabla y posteriormente llenarla
+	 * @param table
+	 * @return
+	 */
 	public JTable eliminarValoresTabla(JTable table) {
 		DefaultTableModel tb = (DefaultTableModel) table.getModel();
 		int a = table.getRowCount() - 1;
@@ -59,6 +69,9 @@ public class PlatillosFiltroControlador implements ActionListener {
 		return table;
 	}
 
+	/**
+	 * Metodo para cargar el 2do combo con datos de la base de datos
+	 */
 	public void cargarCombo() {
 		try {
 			limpiarCombo();
@@ -69,11 +82,17 @@ public class PlatillosFiltroControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para vaciar el segundo combo box
+	 */
 	private void limpiarCombo() {
 		vista.cmbDatos.setModel(new DefaultComboBoxModel(new String[] { "-Seleccione-" }));
 
 	}
-
+	
+	/**
+	 * Metodo para cambiar de ventana
+	 */
 	private void cerrarAbrir() {
 		vista.setVisible(false);
 		Principal viewPrincipal = new Principal();

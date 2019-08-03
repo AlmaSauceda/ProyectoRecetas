@@ -130,6 +130,9 @@ public class RecetasControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para consultar el detalle de la receta
+	 */
 	private void consultarDetalle() {
 		try {
 			listaDetRece = modelRece.consultarDetalleReceta(listaRece.get(indice).getId_receta());
@@ -156,6 +159,9 @@ public class RecetasControlador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para consultar las recetas
+	 */
 	private void consultar() {
 		if (listaRece.size() > 0) {
 			try {
@@ -174,13 +180,14 @@ public class RecetasControlador implements ActionListener {
 
 	}
 
+	/**
+	 * Metodo para cargar las listas de las recetas
+	 */
 	private void cargarIngredientes() {
 		listaRece = new ArrayList<Receta>();
 		try {
 			indice = 0;
 			listaRece = modelRece.consultarReceta();
-			// listaDetRece =
-			// modelRece.consultarDetalleReceta(listaRece.get(indice).getId_platillo());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -338,7 +345,7 @@ public class RecetasControlador implements ActionListener {
 	 */
 	public DetalleReceta crearDetalle() {
 		DetalleReceta dt = new DetalleReceta();
-		
+
 		dt.setCantidad(recReg.getTxtCantidad());
 		dt.setPorcion(recReg.getTxtPorcion());
 		dt.setImplementacion(recReg.getTxtImplementacion());
@@ -352,6 +359,9 @@ public class RecetasControlador implements ActionListener {
 		return dt;
 	}
 
+	/**
+	 * Metodo para actualizar recetas (sin actualizar el detalle)
+	 */
 	private void actualizar() {
 		Receta receta = new Receta();
 		receta.setTitulo(recGes.getTxtTitulo());
