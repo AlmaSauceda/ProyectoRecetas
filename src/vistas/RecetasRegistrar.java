@@ -16,9 +16,11 @@ import controlador.RecetasControlador;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JTextArea;
@@ -74,7 +76,7 @@ public class RecetasRegistrar extends JFrame {
 		setResizable(false);
 		setBackground(new Color(255, 165, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 884, 494);
+		setBounds(100, 100, 895, 524);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 165, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,45 +84,47 @@ public class RecetasRegistrar extends JFrame {
 		contentPane.setLayout(null);
 
 		lblRegistrarIngredientes = new JLabel("REGISTRAR RECETA");
+		lblRegistrarIngredientes.setBackground(SystemColor.desktop);
 		lblRegistrarIngredientes.setBounds(319, 10, 255, 33);
-		lblRegistrarIngredientes.setForeground(new Color(255, 255, 255));
+		lblRegistrarIngredientes.setForeground(SystemColor.desktop);
 		lblRegistrarIngredientes.setFont(new Font("Andalus", Font.BOLD, 25));
 		contentPane.add(lblRegistrarIngredientes);
 
 		lblNewLabel = new JLabel("T\u00EDtulo:");
-		lblNewLabel.setBounds(41, 98, 49, 18);
+		lblNewLabel.setBounds(233, 98, 49, 18);
 		lblNewLabel.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		contentPane.add(lblNewLabel);
 
 		txtTitulo = new JTextField();
-		txtTitulo.setBounds(156, 97, 293, 20);
+		txtTitulo.setBounds(348, 97, 293, 20);
 		contentPane.add(txtTitulo);
 		txtTitulo.setColumns(10);
 
 		lblTipo = new JLabel("Procedimiento:");
-		lblTipo.setBounds(41, 147, 111, 18);
+		lblTipo.setBounds(313, 175, 111, 18);
 		lblTipo.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		contentPane.add(lblTipo);
 
 		txtProcedimiento = new JTextArea();
-		txtProcedimiento.setBounds(156, 128, 293, 83);
+		txtProcedimiento.setBackground(SystemColor.menu);
+		txtProcedimiento.setBounds(340, 224, 498, 83);
 		txtProcedimiento.setLineWrap(true);
 		txtProcedimiento.setColumns(10);
 		txtProcedimiento.setRows(6);
 		contentPane.add(txtProcedimiento);
 
 		lblMarca = new JLabel("Terminolog\u00EDa:");
-		lblMarca.setBounds(41, 226, 101, 18);
+		lblMarca.setBounds(528, 133, 101, 18);
 		lblMarca.setFont(new Font("Cambria Math", Font.BOLD, 15));
 		contentPane.add(lblMarca);
 
 		txtTerminologia = new JTextField();
-		txtTerminologia.setBounds(156, 225, 293, 20);
+		txtTerminologia.setBounds(643, 132, 130, 20);
 		contentPane.add(txtTerminologia);
 		txtTerminologia.setColumns(10);
 
 		btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(714, 363, 110, 30);
+		btnRegistrar.setBounds(574, 454, 110, 30);
 		btnRegistrar.setPreferredSize(new Dimension(110, 30));
 		btnRegistrar.setForeground(new Color(255, 165, 0));
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -128,7 +132,7 @@ public class RecetasRegistrar extends JFrame {
 		contentPane.add(btnRegistrar);
 
 		btnAtrasVentana = new JButton("Atr\u00E1s");
-		btnAtrasVentana.setBounds(714, 412, 110, 30);
+		btnAtrasVentana.setBounds(716, 454, 110, 30);
 
 		btnAtrasVentana.setPreferredSize(new Dimension(110, 30));
 		btnAtrasVentana.setForeground(new Color(255, 165, 0));
@@ -138,7 +142,7 @@ public class RecetasRegistrar extends JFrame {
 
 		lblPlatillo = new JLabel("Platillo:");
 		lblPlatillo.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		lblPlatillo.setBounds(41, 56, 101, 18);
+		lblPlatillo.setBounds(233, 56, 101, 18);
 		contentPane.add(lblPlatillo);
 
 		cmbPlatillo = new JComboBox<String>();
@@ -148,22 +152,22 @@ public class RecetasRegistrar extends JFrame {
 
 			}
 		});
-		cmbPlatillo.setBounds(156, 54, 293, 20);
+		cmbPlatillo.setBounds(348, 54, 293, 20);
 		contentPane.add(cmbPlatillo);
 
 		lblComenzales = new JLabel("Comensales:");
 		lblComenzales.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		lblComenzales.setBounds(41, 270, 101, 18);
+		lblComenzales.setBounds(528, 177, 101, 18);
 		contentPane.add(lblComenzales);
 
 		lblIngredientes = new JLabel("Ingredientes:");
 		lblIngredientes.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		lblIngredientes.setBounds(488, 58, 101, 18);
+		lblIngredientes.setBounds(78, 175, 101, 18);
 		contentPane.add(lblIngredientes);
 
 		cmbIngrediente = new JComboBox();
 		cmbIngrediente.setModel(new DefaultComboBoxModel(new String[] { "Seleccione", }));
-		cmbIngrediente.setBounds(614, 54, 200, 20);
+		cmbIngrediente.setBounds(59, 215, 200, 20);
 		contentPane.add(cmbIngrediente);
 
 		btnAgregar = new JButton("AGREGAR");
@@ -171,44 +175,44 @@ public class RecetasRegistrar extends JFrame {
 		btnAgregar.setForeground(new Color(255, 165, 0));
 		btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAgregar.setBackground(new Color(255, 255, 204));
-		btnAgregar.setBounds(614, 226, 110, 30);
+		btnAgregar.setBounds(107, 393, 110, 30);
 		contentPane.add(btnAgregar);
 
 		lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		lblCantidad.setBounds(488, 100, 101, 18);
+		lblCantidad.setBounds(38, 246, 101, 18);
 		contentPane.add(lblCantidad);
 
 		lblPorcin = new JLabel("Porci\u00F3n:");
 		lblPorcin.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		lblPorcin.setBounds(488, 149, 101, 18);
+		lblPorcin.setBounds(38, 287, 101, 18);
 		contentPane.add(lblPorcin);
 
 		lblImplementacin = new JLabel("Implementaci\u00F3n:");
 		lblImplementacin.setFont(new Font("Cambria Math", Font.BOLD, 15));
-		lblImplementacin.setBounds(488, 197, 130, 18);
+		lblImplementacin.setBounds(37, 329, 130, 18);
 		contentPane.add(lblImplementacin);
 
 		txtImplementacion = new JTextField();
-		txtImplementacion.setBounds(614, 196, 200, 20);
+		txtImplementacion.setBounds(59, 358, 200, 20);
 		contentPane.add(txtImplementacion);
 		txtImplementacion.setColumns(10);
 
 		txtCantidad = new JSpinner();
-		txtCantidad.setBounds(614, 97, 111, 20);
+		txtCantidad.setBounds(93, 263, 111, 20);
 		contentPane.add(txtCantidad);
 
 		txtComenzales = new JSpinner();
-		txtComenzales.setBounds(156, 269, 130, 20);
+		txtComenzales.setBounds(643, 176, 130, 20);
 		contentPane.add(txtComenzales);
 
 		txtPorcion = new JTextField();
-		txtPorcion.setBounds(614, 146, 200, 20);
+		txtPorcion.setBounds(59, 309, 200, 20);
 		contentPane.add(txtPorcion);
 		txtPorcion.setColumns(10);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(145, 308, 539, 119);
+		scrollPane.setBounds(319, 324, 539, 119);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -217,6 +221,12 @@ public class RecetasRegistrar extends JFrame {
 
 		scrollPane.setViewportView(table);
 
+		JLabel fondo = new JLabel("");
+		Image imagen = new ImageIcon(this.getClass().getResource("/fondoReceta.jpg")).getImage();
+		fondo.setIcon(new ImageIcon(imagen));
+		fondo.setBounds(0, 0, 894, 501);
+		contentPane.add(fondo);
+		
 		btnAtrasVentana.addActionListener(controller);
 		btnRegistrar.addActionListener(controller);
 		btnAgregar.addActionListener(controller);
