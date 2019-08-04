@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import controlador.ReporteControlador;
+import decorator.Informe;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -19,7 +20,8 @@ public class Parametros extends DecoradorReporte{
 	private static final String REPORTE_RECETAS = "Inf_Report_Receta.jasper";
 	private ReporteControlador control;
 	private Map<String, Object> parameters;
-	public Parametros(ReporteControlador reporteControlador) {
+	public Parametros(ReporteControlador reporteControlador,Informe informe) {
+		super(informe);
 		this.control = reporteControlador;
 		obtenerParametros();
 	}

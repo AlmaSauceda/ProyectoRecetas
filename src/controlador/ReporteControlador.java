@@ -47,7 +47,7 @@ public class ReporteControlador implements ActionListener{
 		reporte.MuestraInforme(); 
 	}
 	public void llamarReporteFiltros() {
-		Reporte reporte = new Parametros(this); 
+		Reporte reporte = new Parametros(this, new ReporteReceta()); 
 		try { 
 			ConectionPostgresql.getInstance();
 		} catch (ClassNotFoundException | SQLException e) {
