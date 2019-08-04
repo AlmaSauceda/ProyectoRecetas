@@ -21,13 +21,18 @@ public class Parametros extends DecoradorReporte{
 	private Map<String, Object> parameters;
 	public Parametros(ReporteControlador reporteControlador) {
 		this.control = reporteControlador;
+		obtenerParametros();
 	}
 
+	
+	public void obtenerParametros() {  
+			 parameters = new HashMap<String, Object>();
+			 parameters.put("busqueda", control.obtenerParametro());  
+	}
+	
 	@Override
 	public void obtenerInforme() { 
 		try {
-			 parameters = new HashMap<String, Object>();
-			 parameters.put("busqueda", control.obtenerParametro());
 			jasperPrint = JasperFillManager.fillReport("reportes/"+REPORTE_RECETAS, parameters,conexion);
 		} catch (JRException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());

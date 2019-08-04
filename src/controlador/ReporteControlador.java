@@ -34,7 +34,6 @@ public class ReporteControlador implements ActionListener{
 				llamarReporteSimple(); 
 			}
 	}
-	
 	public void llamarReporteSimple() {
 		Reporte reporte = new ReporteReceta(); 
 		try { 
