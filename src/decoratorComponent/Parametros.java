@@ -45,26 +45,33 @@ public class Parametros extends DecoradorReporte{
 	@Override
 	public void compilarInforme() {
 		try {
-		exportar = new JRPdfExporter();
-		exportar.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exportar.setExporterOutput(new SimpleOutputStreamExporterOutput("reporteRecetas.pdf"));
-		conf = new SimplePdfExporterConfiguration();
-		exportar.setConfiguration(conf);
-		exportar.exportReport();
+			exportar = new JRPdfExporter(); 
+			if (jasperPrint.getPages().size() > 0) {
+				exportar.setExporterInput(new SimpleExporterInput(jasperPrint));
+				exportar.setExporterOutput(new SimpleOutputStreamExporterOutput("reporteRecetas.pdf"));
+				conf = new SimplePdfExporterConfiguration();
+				exportar.setConfiguration(conf);
+				exportar.exportReport();
+			}else {
+				JOptionPane.showMessageDialog(null, "No hay datos");
+			}	   
 		} catch (JRException e) { 
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}  
 	} 
 	@Override
 	public void MuestraInforme() {
-		try {		
-				jasperPrintWindow = JasperFillManager.fillReport("reportes/"+REPORTE_RECETAS, parameters,conexion);
-			JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow,false);
-			jasperViewer.setVisible(true);	 
+		try {		 
+			jasperPrintWindow = JasperFillManager.fillReport("reportes/"+REPORTE_RECETAS, parameters,conexion);
+			if (jasperPrintWindow.getPages().size() > 0) {
+				JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow,false);
+				jasperViewer.setVisible(true);	 
+			}else {
+				JOptionPane.showMessageDialog(null, "No hay datos");
+			}	 
 		} catch (JRException e) {
-		JOptionPane.showMessageDialog(null, e.getMessage());
-		} 
-		
+	
+		}  
 	} 
 
 

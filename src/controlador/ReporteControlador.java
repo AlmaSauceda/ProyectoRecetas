@@ -60,7 +60,7 @@ public class ReporteControlador implements ActionListener{
 	}
 	public String obtenerParametro() {
 		return view.solicitaParametro();
-	}
+	} 
 	
 	public class ControllerWindowAdapter extends WindowAdapter{		
 		public void windowClosing(WindowEvent arg0) {  
