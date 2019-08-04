@@ -74,4 +74,9 @@ public class ConectionPostgresql {
 		connection.close();
 	}//End close
 
+	public static Connection getConnection() {
+		return connection;
+	}
+	
+
 } //End class

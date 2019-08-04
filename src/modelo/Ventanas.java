@@ -74,7 +74,7 @@ public class Ventanas {
 	//Dev. by M.G.
 	public void crearVentanaReporte(Principal princi) {
 		princi.setVisible(false);
-		VistaReportes p = new VistaReportes();
+		VistaReportes p = new VistaReportes(princi);
 		p.setVisible(true);
 		princi.dispose();
 
